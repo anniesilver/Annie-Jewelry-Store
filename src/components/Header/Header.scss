@@ -1,0 +1,110 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+.header{
+    display:flex;
+    flex-direction: column;
+    @include block_padding;
+    color:$AnnieSilver-Black;
+    &__logo{
+        img{
+            width:240px;
+        }
+    }
+    &__container{
+        display: flex;
+        justify-content: space-between;
+        &--group{
+            display:flex;
+            justify-content: space-around;
+        }
+    }
+
+    &__navbar{
+        display: flex;
+        justify-content: space-between;
+        color:$AnnieSilver-Black;
+
+        align-items: flex-end;
+        ul{
+            display:flex;
+            margin:0;
+            padding:0;
+  
+        }
+        li{
+            padding: 0 2rem;
+            list-style: none;
+
+        }
+    }
+    &__nav{
+        display: flex;        
+    }
+    &__menu{
+        border-right:1px solid $AnnieSilver-Grey;
+        
+        &--focus{
+            position: relative;
+        }
+    }
+    &__floating{
+        position: absolute;
+        top: 22%; 
+        left: 13%;
+        background-color:$AnnieSilver-Alabaster;
+        border: 1px solid $AnnieSilver-Mercury;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 10px;
+        z-index: 1000; 
+        ul{
+            display: flex;
+            flex-direction: column;
+            width:auto;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            justify-content: center;
+        }
+        li{
+            padding: 5px;
+            width: max-content;
+            cursor: pointer;
+         
+            border-bottom: 1px solid $AnnieSilver-Purple;
+        }
+    }
+    &__search{
+        display: flex;
+        align-items: center;
+        position: relative;
+        width: 40%;        
+        input{
+            background-color: $AnnieSilver-Alabaster;
+            color:$AnnieSilver-Black;
+            height:$input-height;             
+            border: 1px solid $AnnieSilver-Grey;
+            border-radius: $AnnieSilver-Radius;
+            width:100%;
+            padding-left:2.5rem;            
+        }
+        img{
+            position: absolute;
+            top: 30%;         
+            left:3%;           
+        }
+    }
+
+    &__account{        
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        p{
+            margin:0 1rem;
+        }
+    }
+
+    a{
+        color:inherit;
+        text-decoration: none;
+    }
+}

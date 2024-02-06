@@ -1,0 +1,19 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+.hero{
+    display: flex;
+    color:$AnnieSilver-Black;
+    position:relative;
+    h1{
+        position: absolute;
+        top: 22%; 
+        left: 13%;
+        background-color: transparent;
+        z-index: 99;
+    }
+    img{
+        width:100%;
+        object-fit: cover;
+    }
+
+}
