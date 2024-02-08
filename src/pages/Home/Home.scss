@@ -17,3 +17,11 @@
     }
 
 }
+.topsellers{
+    display:flex;
+    justify-content: space-between;
+    @include block_padding;
+    a{
+        text-decoration: none;
+    }
+}
