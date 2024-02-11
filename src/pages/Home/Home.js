@@ -7,7 +7,7 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 
 
 export default function Home(){
-    const [startIndex,setStartIndex]=useState(0);
+   // const [startIndex,setStartIndex]=useState(0);
     const [productsList,setProductsList]=useState([]);
     useEffect(() => {  
         const  fetchData = async ()=>{    

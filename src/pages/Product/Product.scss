@@ -1,0 +1,31 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+.product{
+    display: flex;
+    &__images{
+        display:flex;
+        flex-direction: column;
+        padding:2rem;
+        &--main{
+            border:1px solid $AnnieSilver-Mercury;
+           img{
+            width:40rem;
+           }
+        }
+        &--thumb{
+            display: flex;
+            padding:0.5rem 0;
+            column-gap: 0.5rem;
+            
+            img{     
+                border:1px solid $AnnieSilver-Mercury;
+                width:5rem;
+            }
+        }
+        &__info{
+            display: flex;
+            flex-direction: column;
+        }
+
+    }
+}

@@ -4,11 +4,22 @@ import myaccount from '../../assets/icon/account.svg';
 import cart from '../../assets/icon/cart.svg';
 import search from '../../assets/icon/search.svg';
 import {Link} from 'react-router-dom';
+import {useCart} from '../../components/CartProvider/CartProvider';
+import Cart from '../../components/Cart/Cart';
 import {useState} from 'react';
 
 export default function Header(){
     const [isFloatingVisible,setFloatingVisible]=useState(false);
+    const { cartList, setcartList} = useCart();
+    const [isCartOpen, setIsCartOpen] = useState(false);
+    
+      const  handleCartClose = () => {        
+        setIsCartOpen(false);
+      };
 
+      const handleQtyUpdate () => {       
+
+      }
     return(
     <header className="header">
         <div className="header__container">
@@ -51,6 +62,10 @@ export default function Header(){
                 </ul>
             </div>
         )}     
+        <Cart isOpen={isCartOpen} 
+        handleClose={handleCartClose} 
+        handleQtyUpdate={handleQtyUpdate}
+        cartList={cartList} />
         
     </header>
     )

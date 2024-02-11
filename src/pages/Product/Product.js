@@ -1,69 +1,83 @@
 import './Product.scss';
-import {useEffect,useState} from "react";
+import {useEffect,useState,useRef} from "react";
 import { useParams } from 'react-router-dom';
-import {Link} from 'react-router-dom';
-import { getProductDetail } from '../../components/Util/api';
+import { useCart } from '../../Components/CartProvider/CartProvider.js';
+// import {Link} from 'react-router-dom';
+import { getProductDetail,productImageBaseUrl} from '../../components/Util/api';
 
 export default function Product(){
     // Sample product data (replace with your actual product data)
-    const { id } = useParams();
-    const [currentId, setCurrentId]=useState(id);
-    console.log("current product ID",currentId);
-    let  product={};
+    const {id} = useParams();
+    const { cartList, setCartList} = useCart();
+    const [currentProduct, setCurrentProduct] = useState();
+    const [selectedImage, setSelectedImage] = useState();   
+    const [imagesList,setImagesList] = useState();
+  
     useEffect(() => {  
         const  fetchData = async ()=>{    
-          try{
-            const response = await getProductDetail(currentId);   
-            
-            product = response; 
+          try{                 
+            const response= await getProductDetail(id);           
 
-            setCurrentId(response.id);
+            setCurrentProduct(response);     
+            setImagesList([response.main_img,...response.other_img]);
+            setSelectedImage(response.main_img);
           }  
           catch(e){
             console.error("Error in fetchData when Loading App",e);
           }
         }
-        fetchData();
-    }, [currentId]); 
+        fetchData();       
+    }, [id]);     
+    
 
-    // const images=[...product.other_img];
-    // const [selectedImage, setSelectedImage] = useState(images[0]);
+    const handleThumbnailClick = (image) => {
+      setSelectedImage(image);
+    };
+    
+    
+    const handleAddToCart = () => {    
+      console.log('Product added to cart:');
+      setCartList(cartList);
+    };
 
-    // const handleThumbnailClick = (image) => {
-    //     setSelectedImage(image);
-    // };
+ 
 
-  const handleAddToCart = () => {    
-    console.log('Product added to cart:', product);
-  };
-
+  const readyForRender = Boolean (imagesList?.[0] && currentProduct.name);
   return (
-    <div className="product-detail-page">
-      {/* <div className="product-images">
-        <div className="main-image">
-          <img src={selectedImage} alt="Main Product Image" />
+    
+      readyForRender && (
+        <>
+        <div className="product">
+      <div className="product__images">
+        <div className="product__images--main">
+          <img src={productImageBaseUrl+selectedImage} alt="product"/>
         </div>
-        <div className="thumbnail-images">
-          {images.map((image, index) => (
+        <div className="product__images--thumb">
+          {imagesList.map((image, index) => (
             <img
               key={index}
-              src={image}
-              alt={`Product Image ${index + 1}`}
+              src={productImageBaseUrl+image}
+              alt={`Product`}
               className={selectedImage === image ? 'selected' : ''}
               onClick={() => handleThumbnailClick(image)}
             />
           ))}
         </div>
       </div>
-      <div className="product-info">
-        <h2>{product.name}</h2>
-        {product.bullet_point.map((line, index) => (
-              <li key={index}>line</li>
-          ))}
-        <p>Price: ${product.price}</p>
+      <div className="product__info">
+        <h1 className="product__info--name">{currentProduct.name}</h1>
+        <div className="product__info--bullet">
+          {currentProduct.bullet_point.map((line, index) => (
+                <li key={index}>{line}</li>
+            ))}
+        </div>
+        
+        <p>Price: ${currentProduct.price}</p>
         <button onClick={handleAddToCart}>Add to Cart</button>
-      </div> */}
-    </div>
+      </div>
+    </div>   
+    </>
+    )    
   );
-};
+}
 
