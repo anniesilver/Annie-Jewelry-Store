@@ -10,15 +10,15 @@ import {useState} from 'react';
 
 export default function Header(){
     const [isFloatingVisible,setFloatingVisible]=useState(false);
-    const { cartList, setcartList} = useCart();
+    const { cartList, setCartList} = useCart();
     const [isCartOpen, setIsCartOpen] = useState(false);
     
       const  handleCartClose = () => {        
         setIsCartOpen(false);
       };
 
-      const handleQtyUpdate () => {       
-
+      const handleQtyUpdate = () => {       
+            setCartList(cartList);
       }
     return(
     <header className="header">

@@ -1,6 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
-import Header from "./Components/Header/Header.js";
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home.js";
 import Category from "./pages/Category/Category.js";
@@ -10,6 +9,7 @@ import Cart from "./pages/Cart/Cart.js";
 import MyAccount from "./pages/MyAccount/MyAccount.js";
 import ContactUs from "./pages/ContactUs/ContactUs.js";
 import { CartProvider } from "./components/CartProvider/CartProvider.js";
+import Header from "./components/Header/Header.js";
 
 
 function App() {
