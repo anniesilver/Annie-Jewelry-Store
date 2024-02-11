@@ -5,7 +5,7 @@ const CartContext = createContext();
 
 // Step 2: Create a provider component
 const CartProvider = ({ children }) => {
-  const [cartList, setCartList] = useState(0);
+  const [cartList, setCartList] = useState([]);
 
   return (
     <CartContext.Provider value={{ cartList, setCartList }}>

@@ -9,12 +9,12 @@ import Cart from '../../components/Cart/Cart';
 import {useState} from 'react';
 
 export default function Header(){
-    const [isFloatingVisible,setFloatingVisible]=useState(false);
+    const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
     const { cartList, setCartList} = useCart();
     const [isCartOpen, setIsCartOpen] = useState(false);
     
       const  handleCartClose = () => {        
-        setIsCartOpen(false);
+            setIsCartOpen(false);
       };
 
       const handleQtyUpdate = () => {       
@@ -41,7 +41,7 @@ export default function Header(){
                 <div className="header__menu">             
                     <Link to="/"><li>Home</li></Link>
                 </div> 
-                <div className="header__menu" onMouseOver={()=> {setFloatingVisible(true)}} onMouseLeave={()=> {setFloatingVisible(false)}}>   
+                <div className="header__menu" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}}>   
                     <Link to="/category"><li>Category</li></Link>                    
                 </div> 
                 <div className="header__menu">   
@@ -53,7 +53,7 @@ export default function Header(){
                 <img src={search} alt="Search Annie Jewelry"></img>  
             </div>                                            
         </nav>   
-        {isFloatingVisible && (      
+        {isFloatingMenuOn && (      
             <div className="header__floating">
                 <ul>
                     <li>Silver Collection</li>

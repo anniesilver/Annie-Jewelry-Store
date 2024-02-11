@@ -1,5 +1,5 @@
 import './Product.scss';
-import {useEffect,useState} from "react";
+import {useEffect,useState,useRef} from "react";
 import { useParams } from 'react-router-dom';
 import { useCart } from '../../components/CartProvider/CartProvider.js';
 // import {Link} from 'react-router-dom';
@@ -12,6 +12,7 @@ export default function Product(){
     const [currentProduct, setCurrentProduct] = useState();
     const [selectedImage, setSelectedImage] = useState();   
     const [imagesList,setImagesList] = useState();
+
   
     useEffect(() => {  
         const  fetchData = async ()=>{    
@@ -36,11 +37,29 @@ export default function Product(){
     
     
     const handleAddToCart = () => {    
-      console.log('Product added to cart:');
-      setCartList(cartList);
+      console.log('Product added to cart:');   
+      let newCart = [];
+      if(cartList){
+        const index = cartList.findIndex((p)=>p.id === currentProduct.id);
+
+        if (index !== -1) {
+          // Item already exists in cart, update quantity
+          console.log("already there add qty");
+          const updatedCartItems = [...cartList];
+          updatedCartItems[index].qty += 1;
+          setCartList(updatedCartItems);
+        } else {
+          // Item does not exist in cart, add it
+          console.log("first item to add in");
+          setCartList([...cartList, { ...currentProduct, qty: 1 }]);
+        }
+      }
+      else{
+        setCartList([...cartList, { ...currentProduct, qty: 1 }]);
+      }      
     };
 
- 
+ console.log(cartList);
 
   const readyForRender = Boolean (imagesList?.[0] && currentProduct.name);
   return (
