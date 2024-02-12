@@ -1,5 +1,5 @@
 import './Product.scss';
-import {useEffect,useState,useRef} from "react";
+import {useEffect,useState} from "react";
 import { useParams } from 'react-router-dom';
 import { useCart } from '../../components/CartProvider/CartProvider.js';
 // import {Link} from 'react-router-dom';
@@ -36,21 +36,17 @@ export default function Product(){
     };
     
     
-    const handleAddToCart = () => {    
-      console.log('Product added to cart:');   
-      let newCart = [];
+    const handleAddToCart = () => {     
       if(cartList){
         const index = cartList.findIndex((p)=>p.id === currentProduct.id);
 
         if (index !== -1) {
-          // Item already exists in cart, update quantity
-          console.log("already there add qty");
+          // Item already exists in cart, update quantity          
           const updatedCartItems = [...cartList];
           updatedCartItems[index].qty += 1;
           setCartList(updatedCartItems);
         } else {
           // Item does not exist in cart, add it
-          console.log("first item to add in");
           setCartList([...cartList, { ...currentProduct, qty: 1 }]);
         }
       }
@@ -59,7 +55,6 @@ export default function Product(){
       }      
     };
 
- console.log(cartList);
 
   const readyForRender = Boolean (imagesList?.[0] && currentProduct.name);
   return (
@@ -88,7 +83,7 @@ export default function Product(){
         <div className="product__info--bullet">
           {currentProduct.bullet_point.map((line, index) => (
                 <li key={index}>{line}</li>
-            ))}
+          ))}
         </div>
         
         <p>Price: ${currentProduct.price}</p>

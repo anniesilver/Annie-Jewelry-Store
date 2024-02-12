@@ -1,23 +1,20 @@
-.shopping-cart {
+
+.cart{
   position: fixed;
   top: 0;
   right: -300px; /* Start off screen */
   width: 300px;
   height: 100%;
-  background-color: white;
+  background-color:rgba(0,0,0,0.5);
   transition: right 0.5s ease-in-out;
-}
 
-.shopping-cart.open {
+  &--open {
   right: 0;
+  transition: right 0.5s ease-in-out;
+  }
+ 
+  &--content {
+    padding: 20px;
+  }
 }
 
-.toggle-button {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-}
-
-.cart-content {
-  padding: 20px;
-}

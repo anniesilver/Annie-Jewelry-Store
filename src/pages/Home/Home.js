@@ -32,7 +32,7 @@ export default function Home(){
         <div className='topsellers'>
             {productsList.map((product,index)=> (
                 <Link to={`/product/${product.id}`} key={product.id}>
-                    <ProductCard product={product} />
+                    <ProductCard product={product} mode="block" />
                 </Link>     
             ))}        
         </div>

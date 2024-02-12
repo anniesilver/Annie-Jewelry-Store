@@ -6,20 +6,25 @@ import search from '../../assets/icon/search.svg';
 import {Link} from 'react-router-dom';
 import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
-    const { cartList, setCartList} = useCart();
+    const {cartList, setCartList} = useCart();
     const [isCartOpen, setIsCartOpen] = useState(false);
     
-      const  handleCartClose = () => {        
-            setIsCartOpen(false);
-      };
+    useEffect(()=>{
+        setIsCartOpen(true);
+    },[cartList])
 
-      const handleQtyUpdate = () => {       
-            setCartList(cartList);
-      }
+    const  handleCartClose = () => {        
+        setIsCartOpen(false);
+    };
+    const handleQtyUpdate = () => {       
+        setCartList(cartList);
+    }
+
+      
     return(
     <header className="header">
         <div className="header__container">

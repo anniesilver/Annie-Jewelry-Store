@@ -1,21 +1,63 @@
 @use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
+
 .productcard{
-    display: flex;
-    flex-direction: column;    
-    width:15rem;
-    color:$AnnieSilver-Black;
-    a{
-        text-decoration: none;
+    &__block{
+        display: flex;
+        flex-direction: column;    
+        width:15rem;
+        color:$AnnieSilver-Black;
+        a{
+            text-decoration: none;
+        }
+        img{
+            width:100%;
+        }   
     }
-    img{
-        width:100%;
+    &__line{
+        display: flex; 
+        justify-content: space-between;
+        padding:1rem;
+        color:$AnnieSilver-Black;
+        border-bottom: 1px solid $AnnieSilver-Grey;
+        a{
+            text-decoration: none;
+        }
+        img{
+            padding-right:1rem;
+            width:4rem;
+            height:4rem;
+        }   
+        p{
+            font-size: smaller;
+            font-weight: 600;
+            margin:0;
+        }
     }
     &__info{
         display:flex;
         flex-direction: column;    
+        width:100%;
     }
-    li{
-        list-style: none;
+    &__price{
+        font-size: medium;
+        font-weight: 600;
+        padding:1rem 0;
+        &--cross{
+        text-decoration: line-through;
+        text-decoration: crimson;
+        }
+    }
+
+    &__qty{
+        display: flex;
+        width:6rem;
+        font-size: medium;
+        justify-content: space-around;
+        border:1px solid $AnnieSilver-Black;
+        p{
+            margin: 0;
+            padding:0 5px;
+        }
     }
 }
