@@ -8,6 +8,7 @@ import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
 import {useState,useEffect} from 'react';
 
+
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
     const {cartList, setCartList} = useCart();
@@ -20,11 +21,13 @@ export default function Header(){
     const  handleCartClose = () => {        
         setIsCartOpen(false);
     };
-    const handleQtyUpdate = () => {       
-        setCartList(cartList);
-    }
 
-      
+    const handleCartClick = () =>{
+        setCartList([...cartList]);
+    }
+    
+    const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
+  
     return(
     <header className="header">
         <div className="header__container">
@@ -36,8 +39,9 @@ export default function Header(){
                     <img src={myaccount} alt="Annie Jewelry Store"></img> 
                     <p>Login</p>         
                 </div> 
-                <div className="header__cart">
-                    <a href="/"><img src={cart} alt="Annie Jewelry Store"></img></a>           
+                <div className="header__cart" onClick={handleCartClick}>
+                    <p>{totalQty}</p>
+                    <img src={cart} alt="Annie Jewelry Store"></img>       
                 </div>
             </div>             
         </div>                 
@@ -67,11 +71,7 @@ export default function Header(){
                 </ul>
             </div>
         )}     
-        <Cart isOpen={isCartOpen} 
-        handleClose={handleCartClose} 
-        handleQtyUpdate={handleQtyUpdate}
-        cartList={cartList} />
-        
+        <Cart isOpen={isCartOpen} handleClose={handleCartClose} />     
     </header>
     )
 }

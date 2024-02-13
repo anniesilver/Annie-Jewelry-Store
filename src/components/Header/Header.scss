@@ -23,7 +23,6 @@
         display: flex;
         justify-content: space-between;
         color:$AnnieSilver-Black;
-
         align-items: flex-end;
         ul{
             display:flex;
@@ -68,8 +67,7 @@
         li{
             padding: 5px;
             width: max-content;
-            cursor: pointer;
-         
+            cursor: pointer;         
             border-bottom: 1px solid $AnnieSilver-Purple;
         }
     }
@@ -78,14 +76,19 @@
         align-items: center;
         position: relative;
         width: 40%;        
+        
         input{
             background-color: $AnnieSilver-Alabaster;
             color:$AnnieSilver-Black;
             height:$input-height;             
-            border: 1px solid $AnnieSilver-Grey;
+            border: 1px solid $AnnieSilver-Mercury;
             border-radius: $AnnieSilver-Radius;
             width:100%;
-            padding-left:2.5rem;            
+            padding-left:2.5rem;                 
+            ::focus{
+                border-color: $AnnieSilver-Purple;
+                outline: none;
+            }       
         }
         img{
             position: absolute;
@@ -102,7 +105,19 @@
             margin:0 1rem;
         }
     }
-
+    &__cart{
+        display: flex;
+        align-items: center;
+        position: relative;
+         
+        p{
+            position: absolute;
+            top: 17%;         
+            left: 53%;    
+            font-size: smaller;
+            font-weight: 400;
+        }
+    }
     a{
         color:inherit;
         text-decoration: none;

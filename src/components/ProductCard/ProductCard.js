@@ -22,12 +22,7 @@ export default function ProductCard({product,mode}){
                             <p className="productcard__price--cross">${product.price}</p>                        
                         )                    
                     }   
-                <div className="productcard__price">${product.price}</div>
-                <div className='productcard__qty'>
-                    <p>+</p>
-                    <p>{product.qty}</p>
-                    <p>-</p>
-                </div>
+                <div className="productcard__price">${product.price}</div>                
             </div>
             
         </div>    

@@ -18,8 +18,7 @@
         display: flex; 
         justify-content: space-between;
         padding:1rem;
-        color:$AnnieSilver-Black;
-        border-bottom: 1px solid $AnnieSilver-Grey;
+        color:$AnnieSilver-Black;     
         a{
             text-decoration: none;
         }
@@ -49,15 +48,4 @@
         }
     }
 
-    &__qty{
-        display: flex;
-        width:6rem;
-        font-size: medium;
-        justify-content: space-around;
-        border:1px solid $AnnieSilver-Black;
-        p{
-            margin: 0;
-            padding:0 5px;
-        }
-    }
 }
