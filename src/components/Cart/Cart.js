@@ -1,30 +1,30 @@
 import './Cart.scss';
-import {Link} from "react-router-dom";
+import {useState} from "react";
+import {Link,useNavigate} from "react-router-dom";
 import ProductCard from '../ProductCard/ProductCard';
 import closeIcon from "../../assets/icon/close-24px.svg";
 import rightIcon from "../../assets/icon/right-24px.svg";
 import { useCart } from '../CartProvider/CartProvider';
+import {roundPrice} from '../Util/util';
 
-
-export default function Cart({isOpen,handleClose})
-{
+export default function Cart({handleClose}){
   const {cartList, setCartList} = useCart();
-  let showCart;
-  console.log("show me the  shopping cart",cartList);
-  if(cartList.length===0 || !isOpen)
-  {
-    console.log("empty shopping cart",cartList);
-    showCart=false;
+  const navigate = useNavigate();
+  const readinString = localStorage.getItem('isCartOpen');  
+  console.log("reading from localstorage value:", localStorage.getItem('isCartOpen'));
+  let isCartOpen = false;
+  if(readinString == "true"){
+    isCartOpen=true;
   }
-  else{
-    showCart = true;
-  }
+
   function handleAddOne(e){
     const productId=parseInt(e.target.getAttribute('id'));
     const index = cartList.findIndex((p)=>p.id === productId);      
     const updatedCartItems = [...cartList];
     updatedCartItems[index].qty += 1;
-    setCartList(updatedCartItems);   
+    const cartJSON = JSON.stringify(updatedCartItems);
+    localStorage.setItem('AnnieSilverCart', cartJSON);
+    setCartList(updatedCartItems);           
   }
   function handleMinusOne(e){
     const productId=parseInt(e.target.getAttribute('id'));
@@ -32,11 +32,15 @@ export default function Cart({isOpen,handleClose})
     const updatedCartItems = [...cartList];
     if(updatedCartItems[index].qty=== 1)    {
       updatedCartItems.splice(index,1);
-      setCartList(updatedCartItems);
+      const cartJSON = JSON.stringify(updatedCartItems);
+      localStorage.setItem('AnnieSilverCart', cartJSON);
+      setCartList(updatedCartItems);      
     }
     else{
       updatedCartItems[index].qty -= 1;
-      setCartList(updatedCartItems); 
+      const cartJSON = JSON.stringify(updatedCartItems);
+      localStorage.setItem('AnnieSilverCart', cartJSON);
+      setCartList(updatedCartItems);       
     }    
   }
   function handleRemove(e){
@@ -44,13 +48,21 @@ export default function Cart({isOpen,handleClose})
     const index = cartList.findIndex((p)=>p.id === productId)-1;      
     const updatedCartItems = [...cartList];
     updatedCartItems.splice(index,1)
-    setCartList(updatedCartItems);
+    const cartJSON = JSON.stringify(updatedCartItems);
+    localStorage.setItem('AnnieSilverCart', cartJSON);
+    setCartList(updatedCartItems);    
+  }
+
+
+  function handleViewCart(e){
+    navigate('/shoppingcart');
+    handleClose();
   }
   
-  const subTotal = cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0);
-  
+  const subTotal = roundPrice(cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0));
+  console.log("show cart or not ? :",isCartOpen);
   return ( 
-      <div className={`cart ${showCart ? 'cart--open' : ''}`}>      
+      <div className={`cart ${isCartOpen ? 'cart--open' : ''}`}>     
         <div className="cart__header" onClick={handleClose}>
           <img src={rightIcon}></img>
           <h2>SHOPPING CART</h2>
@@ -75,12 +87,15 @@ export default function Cart({isOpen,handleClose})
             </>
           ))}      
         </div>
-        <h2>SubTotal</h2>
-        <h3> ${subTotal}</h3>
+        <div className='cart__subtotal'>
+          <h2>SubTotal</h2>
+          <h3> ${subTotal}</h3>
+        </div>
+        
         <hr></hr>
         <div  className="cart__button">
-          <button onClick={handleClose}>
-            {showCart && 'Close Cart'}
+          <button onClick={handleViewCart}>
+            <h3>View Cart</h3>
           </button>
         </div>
       </div>

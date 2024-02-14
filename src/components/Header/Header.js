@@ -12,18 +12,38 @@ import {useState,useEffect} from 'react';
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
     const {cartList, setCartList} = useCart();
-    const [isCartOpen, setIsCartOpen] = useState(false);
+
+    //localStorage.setItem("isCartOpen",false);
+
     
     useEffect(()=>{
-        setIsCartOpen(true);
+        const cartJSON = localStorage.getItem('AnnieSilverCart');
+        if(cartJSON){            
+            setCartList(JSON.parse(cartJSON));            
+        }        
+    },[])
+    
+    useEffect(()=>{
+        console.log(cartList);
     },[cartList])
 
-    const  handleCartClose = () => {        
-        setIsCartOpen(false);
+    const  handleCartClick = () => {      
+        localStorage.setItem("isCartOpen","true");
+ 
+        const retrievedValue = localStorage.getItem("isCartOpen");
+        console.log(retrievedValue);
+        // Correct comparison using strict equality
+        console.log(retrievedValue === "true"); // Output: true (if the stored value is "true")
+       
+        // Incorrect comparison due to type coercion
+        console.log(retrievedValue === true); // Output: true (string "tru      
+
+        setCartList([...cartList]);        
     };
 
-    const handleCartClick = () =>{
-        setCartList([...cartList]);
+    const handleClose = () =>{
+        localStorage.setItem('isCartOpen',false);
+        setCartList([...cartList]);        
     }
     
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
@@ -71,7 +91,7 @@ export default function Header(){
                 </ul>
             </div>
         )}     
-        <Cart isOpen={isCartOpen} handleClose={handleCartClose} />     
+        <Cart handleClose={handleClose}/>     
     </header>
     )
 }

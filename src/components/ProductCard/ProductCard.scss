@@ -6,6 +6,7 @@
         display: flex;
         flex-direction: column;    
         width:15rem;
+        align-items: baseline;
         color:$AnnieSilver-Black;
         a{
             text-decoration: none;
@@ -30,13 +31,16 @@
         p{
             font-size: smaller;
             font-weight: 600;
-            margin:0;
+            margin:0;    
+            padding: 0;
         }
     }
     &__info{
         display:flex;
         flex-direction: column;    
         width:100%;
+        padding:1rem;
+        
     }
     &__price{
         font-size: medium;
@@ -47,5 +51,6 @@
         text-decoration: crimson;
         }
     }
+    
 
 }

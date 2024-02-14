@@ -38,19 +38,29 @@ export default function Product(){
     const handleAddToCart = () => {     
       if(cartList){
         const index = cartList.findIndex((p)=>p.id === currentProduct.id);
-
         if (index !== -1) {
           // Item already exists in cart, update quantity          
           const updatedCartItems = [...cartList];
           updatedCartItems[index].qty += 1;
+          const cartJSON = JSON.stringify(updatedCartItems);
+          localStorage.setItem('AnnieSilverCart', cartJSON);
+          localStorage.setItem('isCartOpen', true);
           setCartList(updatedCartItems);
         } else {
           // Item does not exist in cart, add it
-          setCartList([...cartList, { ...currentProduct, qty: 1 }]);
+          const updatedCartItems = [...cartList, { ...currentProduct, qty: 1 }];
+          const cartJSON = JSON.stringify(updatedCartItems);
+          localStorage.setItem('AnnieSilverCart', cartJSON);
+          localStorage.setItem('isCartOpen', true);
+          setCartList(updatedCartItems);
         }
       }
       else{
-        setCartList([...cartList, { ...currentProduct, qty: 1 }]);
+        const updatedCartItems=[{...currentProduct, qty: 1 }];
+        const cartJSON = JSON.stringify(updatedCartItems);
+        localStorage.setItem('AnnieSilverCart', cartJSON);
+        localStorage.setItem('isCartOpen', true);
+        setCartList(updatedCartItems);
       }      
     };
 

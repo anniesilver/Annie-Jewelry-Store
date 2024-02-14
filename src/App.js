@@ -5,7 +5,7 @@ import Home from "./pages/Home/Home.js";
 import Category from "./pages/Category/Category.js";
 import Product from "./pages/Product/Product.js";
 import Search from "./pages/Search/Search.js";
-import Cart from "./pages/Cart/Cart.js";
+import ShopingCart from "./pages/ShoppingCart/ShoppingCart.js";
 import MyAccount from "./pages/MyAccount/MyAccount.js";
 import ContactUs from "./pages/ContactUs/ContactUs.js";
 import { CartProvider } from "./components/CartProvider/CartProvider.js";
@@ -25,7 +25,7 @@ function App() {
               <Route path="/category" element={<Category />} />
               <Route path="/product/:id" element={<Product />} />
               <Route path="/search" element={<Search />} />
-              <Route path="/cart" element={<Cart />} />
+              <Route path="/shoppingcart" element={<ShopingCart />} />
               <Route path="/myaccount" element={<MyAccount />} />
               <Route path="/contact" element={<ContactUs />} />
             </Routes>

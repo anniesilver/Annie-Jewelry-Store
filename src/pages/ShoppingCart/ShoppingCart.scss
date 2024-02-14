@@ -1,46 +1,23 @@
 @use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
-
-  
-  .cart{
-    position: fixed;
-    top: 0;
-    right: -20rem; /* Start off screen */
-    width: 20rem;
-    height: 100%;
-    background-color:white;
-    transition: right 0.5s ease-in-out;
-    z-index: 9999;
-
+.shoppingcart{
     display: flex;   
-    flex-direction: column;    
-    &__header{
-      display: flex;
-      justify-content: space-between;
-      padding:1rem;
-      color:white;
-      background-color: $AnnieSilver-Grey;
-    }
-
-    &--open {
-    right: 0;
-    transition: right 0.5s ease-in-out;
-    } 
+    padding:2rem;
 
     &__button{ 
       display: flex;
       justify-content: center;
-      
-      button{      
-        background: linear-gradient(135deg, #ffffff, $AnnieSilver-Purple, #ffffff);
-        width:60%;
+
+      button{
+        background-color: $AnnieSilver-Purple;       
         height:2.5rem;
+        width: 60%;
         border-radius:1.25rem;
         border: 1px solid transparent;
-        color: white;
         cursor: pointer;
         h3{
           margin:0;
+          color:white;
         }
       }
     }
@@ -49,7 +26,8 @@
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      border-bottom: 1px solid $AnnieSilver-Grey;
+      align-items: flex-start;
+
       padding:1rem;
       &--update{
         display: flex;
@@ -57,7 +35,7 @@
         width:6rem;
         font-size: medium;
         justify-content: space-around;
-        border:1px solid $AnnieSilver-Black;     
+        border:1px solid $AnnieSilver-Mercury;     
         p{
             margin: 0;
             padding:0 5px;
@@ -72,20 +50,41 @@
         }
       }        
     }
-    &__subtotal{
-      display: flex;
-      justify-content: space-between;
+    &__content{
+        display: flex;
+        flex-direction: column;
+        border-right: 1px solid $AnnieSilver-Mercury;
+        padding-right: 3rem;
     }
+    &__item {
+        display: flex;
+        justify-content: space-between;
+    }
+    &__summary{     
+        padding-left: 2rem;
+        width: 35%;
+        h2{
+          padding:0;
+        }
+        ul{
+          display: flex;
+          justify-content: space-between;
+          padding:0;
+        }
+        li{
+          list-style: none;
+          
+        }
 
+    }
     hr{
-      color:$AnnieSilver-Grey;
+      color:$AnnieSilver-Mercury;
       height:1px;
     }
-    h2,h3{
-      padding: 0 1rem;
+    
+    p{
+        padding: 0 1rem;
     }
    
   }
   
-  
-
