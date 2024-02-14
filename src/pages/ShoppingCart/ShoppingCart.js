@@ -49,10 +49,13 @@ export default function ShoppingCart(){
     }
 
     const itemTotal = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
-    const subTotal = roundPrice(cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0));
-    const tax = roundPrice(subTotal*0.13);
-    const shippingFee = roundPrice((subTotal>100) ? 0 : 10);
-    const orderTotal = roundPrice(subTotal + tax + shippingFee);
+    const accumTotal= cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0);
+    
+    const subTotal = roundPrice(accumTotal);
+    const tax = roundPrice(accumTotal*0.13);
+    const shippingFee = roundPrice((accumTotal>100) ? 0 : 10);
+    const orderTotal = roundPrice(accumTotal + accumTotal*0.13 + shippingFee);
+
     return(
       <div className='shoppingcart'>
         <div className="shoppingcart__content">
