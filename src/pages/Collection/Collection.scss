@@ -1,0 +1,10 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+
+.collection{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    @include block_padding;
+    column-gap: 2rem;
+}

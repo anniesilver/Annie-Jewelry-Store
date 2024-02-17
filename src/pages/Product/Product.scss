@@ -7,9 +7,10 @@
         flex-direction: column;
         padding:2rem;
         &--main{
+            display: flex;
             border:1px solid $AnnieSilver-Mercury;
            img{
-            width:40rem;
+            width:100%;
            }
         }
         &--thumb{

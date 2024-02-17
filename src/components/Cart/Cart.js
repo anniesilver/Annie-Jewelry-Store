@@ -1,5 +1,4 @@
 import './Cart.scss';
-import {useState} from "react";
 import {Link,useNavigate} from "react-router-dom";
 import ProductCard from '../ProductCard/ProductCard';
 import closeIcon from "../../assets/icon/close-24px.svg";
@@ -11,7 +10,7 @@ export default function Cart({handleClose}){
   const {cartList, setCartList} = useCart();
   const navigate = useNavigate();
   const readinString = localStorage.getItem('isCartOpen');  
-  console.log("reading from localstorage value:", localStorage.getItem('isCartOpen'));
+
   let isCartOpen = false;
   if(readinString == "true"){
     isCartOpen=true;
@@ -43,16 +42,16 @@ export default function Cart({handleClose}){
       setCartList(updatedCartItems);       
     }    
   }
+
   function handleRemove(e){
-    const productId=parseInt(e.target.getAttribute('id'));
-    const index = cartList.findIndex((p)=>p.id === productId)-1;      
+    const productId=parseInt(e.target.getAttribute('id'));  
     const updatedCartItems = [...cartList];
-    updatedCartItems.splice(index,1)
+    const index = updatedCartItems.findIndex((p)=>p.id === productId);        
+    updatedCartItems.splice(index,1);   
     const cartJSON = JSON.stringify(updatedCartItems);
     localStorage.setItem('AnnieSilverCart', cartJSON);
-    setCartList(updatedCartItems);    
+    setCartList(updatedCartItems);      
   }
-
 
   function handleViewCart(e){
     navigate('/shoppingcart');
@@ -60,7 +59,7 @@ export default function Cart({handleClose}){
   }
   
   const subTotal = roundPrice(cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0));
-  console.log("show cart or not ? :",isCartOpen);
+
   return ( 
       <div className={`cart ${isCartOpen ? 'cart--open' : ''}`}>     
         <div className="cart__header" onClick={handleClose}>

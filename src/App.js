@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './App.css';
 import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home.js";
-import Category from "./pages/Category/Category.js";
+import Collection from "./pages/Collection/Collection.js";
 import Product from "./pages/Product/Product.js";
 import Search from "./pages/Search/Search.js";
 import ShopingCart from "./pages/ShoppingCart/ShoppingCart.js";
@@ -22,7 +22,7 @@ function App() {
             <main>
             <Routes>              
               <Route path="/" element={<Home />} />           
-              <Route path="/category" element={<Category />} />
+              <Route path="/collection/:id" element={<Collection />} />
               <Route path="/product/:id" element={<Product />} />
               <Route path="/search" element={<Search />} />
               <Route path="/shoppingcart" element={<ShopingCart />} />

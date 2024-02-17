@@ -72,7 +72,7 @@ export default function Product(){
         <div className="product">
             <div className="product__images">
               <div className="product__images--main">
-                <img src={productImageBaseUrl+selectedImage} alt="product"/>
+                <img src={productImageBaseUrl+selectedImage} alt={currentProduct.name}/>
               </div>
               <div className="product__images--thumb">
                 {imagesList.map((image, index) => (

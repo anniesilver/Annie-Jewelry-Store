@@ -19,7 +19,11 @@
 }
 .topsellers{
     display:flex;
+    flex-direction: column;
     justify-content: space-between;
+    @include tablet{
+        flex-direction:row;
+    }
     @include block_padding;
     a{
         text-decoration: none;

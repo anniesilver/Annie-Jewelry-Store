@@ -3,6 +3,7 @@
 .header{
     display:flex;
     flex-direction: column;
+    position:relative;
     @include block_padding;
     color:$AnnieSilver-Black;
     &__logo{
@@ -40,6 +41,7 @@
     }
     &__menu{
         border-right:1px solid $AnnieSilver-Grey;
+        padding:0;
         
         &--focus{
             position: relative;
@@ -47,13 +49,13 @@
     }
     &__floating{
         position: absolute;
-        top: 22%; 
-        left: 13%;
+        top: 86%; 
+        left: 10%;
         background-color:$AnnieSilver-Alabaster;
         border: 1px solid $AnnieSilver-Mercury;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         padding: 10px;
-        z-index: 1000; 
+        z-index: 100; 
         ul{
             display: flex;
             flex-direction: column;

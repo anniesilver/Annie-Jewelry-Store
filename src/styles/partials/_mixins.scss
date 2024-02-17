@@ -1,11 +1,5 @@
 @use "./variables" as *;
 
-@mixin mobile{
-  @media screen and (max-width: $tablet-breakpoint) {       
-    @content;
-  }
-}
-
 @mixin tablet{
   @media screen and (min-width: $tablet-breakpoint) {       
     @content;
@@ -16,74 +10,6 @@
     @content;    
   }
 }
-
-@mixin pageheader_font{
-  font-size: $m-fontsize-page-header;
-  font-weight: $m-fontweight-page-header;
-  
-  @include tablet{
-    font-size: $t-fontsize-page-header;    
-    font-weight: $t-fontweight-page-header;
-  }
-  @include desktop{
-    font-size: $d-fontsize-page-header;  
-    font-weight: $d-fontweight-page-header; 
-  }
-}
-
-@mixin sectionheader_font{
-  font-size: $m-fontsize-section-header;
-  font-weight: $m-fontweight-section-header; 
-  @include tablet{  
-    font-size: $t-fontsize-section-header;
-    font-weight: $t-fontweight-section-header;
-  }
-  @include desktop{
-    font-size: $d-fontsize-section-header;
-    font-weight: $d-fontweight-section-header;          
-  }      
-}
-
-
-@mixin subheader_font{
-  font-size: $m-fontsize-subheader;
-  font-weight: $m-fontweight-subheader;
-  @include tablet{  
-    font-size: $t-fontsize-subheader;
-    font-weight: $t-fontweight-subheader;
-  }
-  @include desktop{
-    font-size: $d-fontsize-subheader;
-    font-weight: $d-fontweight-subheader;          
-  }      
-}
-
-@mixin bodycopy_font{
-  font-size: $m-fontsize-bodycopy;
-  font-weight: $m-fontweight-bodycopy; 
-  @include tablet{  
-    font-size: $t-fontsize-bodycopy;
-    font-weight: $t-fontweight-bodycopy;    
-  }
-  @include desktop{
-    font-size: $d-fontsize-bodycopy;
-    font-weight: $d-fontweight-bodycopy;            
-  }      
-}
-
-@mixin labelbutton_font{
-  font-size: $m-fontsize-labelbutton;
-  font-weight: $m-fontweight-labelbutton;
-  @include tablet{  
-    font-size: $t-fontsize-labelbutton;
-    font-weight: $t-fontweight-labelbutton;    
-  }
-  @include desktop{
-    font-size: $d-fontsize-labelbutton;
-    font-weight: $d-fontweight-labelbutton;            
-  }      
-}
-
 
 @mixin block_padding{
   padding: $m-padding-content-between;

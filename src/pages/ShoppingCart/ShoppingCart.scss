@@ -45,9 +45,11 @@
       &--remove{
         display:flex;
         justify-content: flex-start;
-        p{
+        p,img{
           margin:0;
+          pointer-events: none;
         }
+
       }        
     }
     &__content{

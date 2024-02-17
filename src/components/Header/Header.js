@@ -47,7 +47,7 @@ export default function Header(){
     }
     
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
-  
+
     return(
     <header className="header">
         <div className="header__container">
@@ -71,7 +71,7 @@ export default function Header(){
                     <Link to="/"><li>Home</li></Link>
                 </div> 
                 <div className="header__menu" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}}>   
-                    <Link to="/category"><li>Category</li></Link>                    
+                    <Link to="/collection/0"><li>Category</li></Link>                    
                 </div> 
                 <div className="header__menu">   
                     <Link to="/contactus"><li>Contact Us</li></Link>
@@ -83,11 +83,11 @@ export default function Header(){
             </div>                                            
         </nav>   
         {isFloatingMenuOn && (      
-            <div className="header__floating">
+            <div className="header__floating" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}} onClick={()=> {setisFloatingMenuOn(false)}} >
                 <ul>
-                    <li>Silver Collection</li>
-                    <li>Freshwater Pearl</li>
-                    <li>Golden Collection</li>
+                    <Link to="/collection/1"><li>Silver Collection</li></Link>
+                    <Link to="/collection/2"><li>Freshwater Pearl</li></Link>
+                    <Link to="/collection/3"><li>Golden Collection</li></Link>                 
                 </ul>
             </div>
         )}     

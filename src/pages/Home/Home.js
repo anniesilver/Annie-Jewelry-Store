@@ -2,7 +2,7 @@ import bannerImg from '../../assets/images/banner.jpg';
 import './Home.scss';
 import {useEffect,useState} from "react";
 import {Link} from 'react-router-dom';
-import {getProductsList} from '../../components/Util/api';
+import {getTopSellers} from '../../components/Util/api';
 import ProductCard from '../../components/ProductCard/ProductCard';
 
 
@@ -12,7 +12,7 @@ export default function Home(){
     useEffect(() => {  
         const  fetchData = async ()=>{    
           try{
-            const list = await getProductsList();    
+            const list = await getTopSellers(4);
             setProductsList(list);
           }  
           catch(e){

@@ -35,15 +35,17 @@ export default function ShoppingCart(){
         setCartList(updatedCartItems);         
       }    
     }
+
     function handleRemove(e){
-      const productId=parseInt(e.target.getAttribute('id'));
-      const index = cartList.findIndex((p)=>p.id === productId)-1;      
+      const productId=parseInt(e.target.getAttribute('id'));  
       const updatedCartItems = [...cartList];
-      updatedCartItems.splice(index,1);
+      const index = updatedCartItems.findIndex((p)=>p.id === productId);  
+      updatedCartItems.splice(index,1);   
       const cartJSON = JSON.stringify(updatedCartItems);
       localStorage.setItem('AnnieSilverCart', cartJSON);
-        setCartList(updatedCartItems);      
+      setCartList(updatedCartItems);      
     }
+
     function handleCheckOutClick(e){
         navigate("/checkout");
     }
