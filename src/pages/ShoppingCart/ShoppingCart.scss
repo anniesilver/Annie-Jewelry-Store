@@ -10,9 +10,9 @@
 
       button{
         background-color: $AnnieSilver-Purple;       
-        height:2.5rem;
-        width: 60%;
-        border-radius:1.25rem;
+        height:3rem;
+        width: 92%;
+        border-radius:5px;
         border: 1px solid transparent;
         cursor: pointer;
         h3{
@@ -77,8 +77,11 @@
           list-style: none;
           
         }
-
     }
+    &__paypal{
+        padding: 1rem;
+    }
+
     hr{
       color:$AnnieSilver-Mercury;
       height:1px;

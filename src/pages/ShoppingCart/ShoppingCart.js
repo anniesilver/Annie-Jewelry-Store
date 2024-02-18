@@ -5,6 +5,7 @@ import closeIcon from "../../assets/icon/close-24px.svg";
 import {useNavigate} from 'react-router-dom';
 import {roundPrice} from '../../components/Util/util';
 
+
 export default function ShoppingCart(){
     const {cartList, setCartList} = useCart();
     const navigate=useNavigate();
@@ -104,7 +105,7 @@ export default function ShoppingCart(){
             <button onClick={handleCheckOutClick}>
               <h3>Check Out</h3>
             </button>
-          </div>
+          </div>          
         </div>
       </div>
     )
