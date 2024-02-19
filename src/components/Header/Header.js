@@ -8,44 +8,29 @@ import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
 import {useState,useEffect} from 'react';
 import LoginModal from "../LoginModal/LoginModal";
-import axios from "axios"
+import {getUser} from "../Util/api";
 
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
     const {cartList, setCartList} = useCart();
     const [loginModal,setLoginModal]=useState(false);
-
     const [userInfo, setUserInfo] = useState({});
   
-  
+    async function decodeAuth(){
+        const decodeUser= await getUser();
+        console.log(decodeUser);
+        if(decodeUser){
+            setUserInfo(decodeUser); 
+        }        
+    }
     useEffect(() => { 
-        getUser(); 
+        decodeAuth();
         const cartJSON = localStorage.getItem('AnnieSilverCart');
         if(cartJSON){            
             setCartList(JSON.parse(cartJSON));            
         }       
-    }, []);
+    }, []);   
     
-   
-    
-    async function  getUser(){
-        const token = sessionStorage.getItem("authToken");
-        console.log("authToken we saved in session :",token)
-        try{
-          const response = await axios.get("http://localhost:8080/users/profile",
-          {
-            headers:{
-              Authorization :`Bearer ${token}`,
-            },
-          }
-          );
-          console.log(response);
-          setUserInfo(response.data);
-        }catch(e)
-        {
-          console.error(e);
-        }
-    }
     const  handleCartClick = () => {      
         localStorage.setItem("isCartOpen","true");
  
@@ -69,6 +54,11 @@ export default function Header(){
             console.log(userInfo.firstname);
         }        
         setLoginModal(true);
+    }
+    function notifyParentRefresh(refresh){
+        if(refresh){
+            decodeAuth();
+        }
     }
 
     const userLoggedIn = Boolean((userInfo?.firstname));
@@ -125,7 +115,7 @@ export default function Header(){
         )}     
         <Cart handleClose={handleCartClose}/>        
         {
-            loginModal && (<LoginModal />)
+            loginModal && (<LoginModal notifyParentRefresh={notifyParentRefresh}/>)
         }     
     </header>
     )

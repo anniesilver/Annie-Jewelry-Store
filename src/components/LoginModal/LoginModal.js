@@ -1,13 +1,10 @@
 import React from "react";
 import "./LoginModal.scss";
-import { useState,useEffect } from "react";
+import { useState} from "react";
+import {apiSignup,apiLogin} from "../Util/api";
 
-import axios from "axios";
 
-
-export default function LoginModal(){
-
-    const [isSignedUp, setIsSignedUp] = useState(false);
+export default function LoginModal({notifyParentRefresh}){
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoginError, setIsLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -25,11 +22,11 @@ export default function LoginModal(){
                 firstname:e.target.firstname.value
             }
             console.log(user,"trying to sign up");
-          const response = await axios.post("http://localhost:8080/users/signup",user);
-
-          if(response.data.success)
+          //const response = await axios.post("http://localhost:8080/users/signup",user);
+          const response = await apiSignup(user);
+          if(response.success)
           {
-            setIsSignedUp(true);
+            setIsLoggedIn(true);
           }
         }catch(e){
           console.error(e);
@@ -44,19 +41,21 @@ export default function LoginModal(){
       // Here send a POST request to loginUrl with username and password data
       const login = async () =>{
         try{
-          const response = await axios.post("http://localhost:8080/users/login",
-          {
-            email:e.target.email.value, 
-            password:e.target.password.value
-          }) 
-          if(response.data.token)
+            const user={
+                email:e.target.email.value, 
+                password:e.target.password.value
+            }
+          //const response = await axios.post("http://localhost:8080/users/login",user);
+          const response = await apiLogin(user);
+          if(response.token)
           {
             setIsLoggedIn(true);
-            sessionStorage.authToken = response.data.token;
+            sessionStorage.authToken = response.token;
+            notifyParentRefresh(true);
           }
           else{
             setIsLoginError (true); 
-            setErrorMessage(response.data.error);
+            setErrorMessage(response.error);
           }
         }catch(e){
           console.error(e);
@@ -67,8 +66,6 @@ export default function LoginModal(){
     const handleCancel = (e) => {
         setIsLoggedIn(true);
     }
-
-
   
     const renderSignUp = () => (
         <div className="modal">
