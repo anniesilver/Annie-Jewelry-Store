@@ -6,7 +6,11 @@ export default function ButtonWrapper({ showSpinner }){
     const [{ isPending }] = usePayPalScriptReducer();
     const {cartList, setCartList} = useCart();
     // This value is from the props in the UI
-    const style = {"layout":"vertical"};
+    const style = {
+        "layout":"vertical",
+        "color":"silver",
+        "shape":"pill"
+    };
     const baseUrl = "http://localhost:8080";
     
     async function createOrder() {
@@ -19,7 +23,7 @@ export default function ButtonWrapper({ showSpinner }){
               "PayPal-Partner-Attribution-Id": "BN-CODE",
               "PayPal-Auth-Assertion": "PAYPAL-AUTH-ASSERTION"
             },            
-            body: JSON.stringify(cartList),
+            body: JSON.stringify({"user_id":1, "cart":cartList}),
           });
           // console.log("before loading paypal button, the cartList",cartList);
           // const orderData = await axios.post(`${baseUrl}/orders`,cartList);
@@ -51,6 +55,7 @@ export default function ButtonWrapper({ showSpinner }){
           });
     
           const orderData = await response.json();
+          console.log("we got the reponse from my server",orderData);
           // Three cases to handle:
           //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
           //   (2) Other non-recoverable errors -> Show a failure message
@@ -76,6 +81,8 @@ export default function ButtonWrapper({ showSpinner }){
             resultMessage(
               `Transaction ${transaction.status}: ${transaction.id}<br><br>See console for all available details`,
             );
+            //transaction succeed, empty shopping cart for now
+            setCartList([]);
             console.log(
               "Capture result",
               orderData,
@@ -83,7 +90,7 @@ export default function ButtonWrapper({ showSpinner }){
             );
           }
         } catch (error) {
-          console.error(error);
+          console.error(error);          
           resultMessage(
             `Sorry, your transaction could not be processed...<br><br>${error}`,
           );
