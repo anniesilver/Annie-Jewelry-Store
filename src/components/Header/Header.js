@@ -7,26 +7,45 @@ import {Link} from 'react-router-dom';
 import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
 import {useState,useEffect} from 'react';
-
+import LoginModal from "../LoginModal/LoginModal";
+import axios from "axios"
 
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
     const {cartList, setCartList} = useCart();
+    const [loginModal,setLoginModal]=useState(false);
 
-    //localStorage.setItem("isCartOpen",false);
-
-    
-    useEffect(()=>{
+    const [userInfo, setUserInfo] = useState({});
+  
+  
+    useEffect(() => { 
+        getUser(); 
         const cartJSON = localStorage.getItem('AnnieSilverCart');
         if(cartJSON){            
             setCartList(JSON.parse(cartJSON));            
-        }        
-    },[])
+        }       
+    }, []);
     
-    useEffect(()=>{
-        console.log(cartList);
-    },[cartList])
-
+   
+    
+    async function  getUser(){
+        const token = sessionStorage.getItem("authToken");
+        console.log("authToken we saved in session :",token)
+        try{
+          const response = await axios.get("http://localhost:8080/users/profile",
+          {
+            headers:{
+              Authorization :`Bearer ${token}`,
+            },
+          }
+          );
+          console.log(response);
+          setUserInfo(response.data);
+        }catch(e)
+        {
+          console.error(e);
+        }
+    }
     const  handleCartClick = () => {      
         localStorage.setItem("isCartOpen","true");
  
@@ -41,11 +60,18 @@ export default function Header(){
         setCartList([...cartList]);        
     };
 
-    const handleClose = () =>{
+    const handleCartClose = () =>{
         localStorage.setItem('isCartOpen',false);
         setCartList([...cartList]);        
     }
-    
+    const handleLoginClick = () =>{
+        if(userInfo?.firstname){
+            console.log(userInfo.firstname);
+        }        
+        setLoginModal(true);
+    }
+
+    const userLoggedIn = Boolean((userInfo?.firstname));
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
 
     return(
@@ -55,9 +81,15 @@ export default function Header(){
                 <a href="/"><img src={logo} alt="Annie Jewelry Store"></img></a>           
             </div>      
             <div className="header__container--group">
-                <div className="header__account">
+                <div className="header__account" onClick={handleLoginClick}>
                     <img src={myaccount} alt="Annie Jewelry Store"></img> 
-                    <p>Login</p>         
+                    { 
+                        userLoggedIn ? (
+                            <p>{userInfo.firstname}</p>
+                        ):(
+                            <p>Login</p>
+                        )             
+                    }                           
                 </div> 
                 <div className="header__cart" onClick={handleCartClick}>
                     <p>{totalQty}</p>
@@ -91,7 +123,10 @@ export default function Header(){
                 </ul>
             </div>
         )}     
-        <Cart handleClose={handleClose}/>     
+        <Cart handleClose={handleCartClose}/>        
+        {
+            loginModal && (<LoginModal />)
+        }     
     </header>
     )
 }

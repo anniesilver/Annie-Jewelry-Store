@@ -1,0 +1,29 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins.scss" as *;
+
+.modal {
+  position: fixed;
+  z-index: 1000;
+  top:0%;
+  left: 0%;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: rgba(19, 24, 44, 0.7);
+
+  @include tablet {
+    justify-content: center;
+  }
+
+&__container {
+  background-color: rgba(255, 255, 255, 100);
+  position: absolute;
+  top: 20%;
+  height: 20rem;
+  width: 30rem;
+  z-index: 1050;
+  padding: 2rem;
+  border: none;
+}
+
+}
