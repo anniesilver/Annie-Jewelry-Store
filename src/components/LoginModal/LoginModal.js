@@ -27,6 +27,7 @@ export default function LoginModal({notifyParentRefresh}){
           if(response.success)
           {
             setIsLoggedIn(true);
+            notifyParentRefresh(true);
           }
         }catch(e){
           console.error(e);

@@ -90,18 +90,8 @@ export async function apiLogin(user){
         console.error(err);
     }
 }
-export async function apiProfile(authHeader){ 
-    const URI=`${baseUrl}/users/profile`;  
-    console.log(authHeader);
-    try {          
-        const response = await axios.get(`${URI}`,authHeader);    
-        return response.data;
-    } catch (err) {
-        console.log('error when retrieving usser profile. try again pls');
-        console.error(err);
-    }
-}
-export async function getUser(){ 
+
+export async function getProfile(){ 
     const URI=`${baseUrl}/users/profile`;  
     const token = sessionStorage.getItem("authToken");
     if(token){
@@ -120,13 +110,12 @@ export async function getUser(){
             }
             
         } catch (err) {
-            console.log('error when retrieving usser profile. try again pls');
+            console.log('error when verify usser auth. try again pls');
             console.error(err);
             return null;
         }
     }
     else{
         return null;
-    }
-    
+    }    
 }

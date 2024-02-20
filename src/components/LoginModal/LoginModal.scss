@@ -24,6 +24,19 @@
   z-index: 1050;
   padding: 2rem;
   border: none;
+  input{
+    background-color: $AnnieSilver-Alabaster;
+    color:$AnnieSilver-Black;
+    height:$input-height;             
+    border: 1px solid $AnnieSilver-Mercury;
+    border-radius: $AnnieSilver-Radius;
+    width:100%;
+    padding-left:0.2rem;                 
+    ::focus{
+        border-color: $AnnieSilver-Purple;
+        outline: none;
+    }       
+}
 }
 
 }

@@ -14,16 +14,17 @@ export default function ButtonWrapper({ showSpinner }){
     const baseUrl = "http://localhost:8080";
     
     async function createOrder() {
+        const token = sessionStorage.getItem("authToken");
         try {
           const response = await fetch(`${baseUrl}/orders`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
-              "Authorization": "Bearer ACCESS-TOKEN",
+              "Authorization" :`Bearer ${token}`,              
               "PayPal-Partner-Attribution-Id": "BN-CODE",
               "PayPal-Auth-Assertion": "PAYPAL-AUTH-ASSERTION"
             },            
-            body: JSON.stringify({"user_id":1, "cart":cartList}),
+            body: JSON.stringify(cartList),
           });
           // console.log("before loading paypal button, the cartList",cartList);
           // const orderData = await axios.post(`${baseUrl}/orders`,cartList);
@@ -45,12 +46,14 @@ export default function ButtonWrapper({ showSpinner }){
         }
     }
     async function onApprove(data, actions) { 
+        const token = sessionStorage.getItem("authToken");
         try {
           console.log("paypal order id been created",data);
           const response = await fetch(`${baseUrl}/orders/${data.orderID}/capture`, {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
+              "Authorization" :`Bearer ${token}`, 
             },
           });
     

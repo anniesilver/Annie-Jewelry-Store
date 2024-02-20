@@ -8,7 +8,7 @@ import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
 import {useState,useEffect} from 'react';
 import LoginModal from "../LoginModal/LoginModal";
-import {getUser} from "../Util/api";
+import {getProfile} from "../Util/api";
 
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
@@ -17,7 +17,7 @@ export default function Header(){
     const [userInfo, setUserInfo] = useState({});
   
     async function decodeAuth(){
-        const decodeUser= await getUser();
+        const decodeUser= await getProfile();
         console.log(decodeUser);
         if(decodeUser){
             setUserInfo(decodeUser); 
