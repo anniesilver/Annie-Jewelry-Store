@@ -12,7 +12,7 @@ export default function Cart({handleClose}){
   const readinString = localStorage.getItem('isCartOpen');  
 
   let isCartOpen = false;
-  if(readinString == "true"){
+  if(readinString === "true"){
     isCartOpen=true;
   }
 
@@ -60,10 +60,11 @@ export default function Cart({handleClose}){
   
   const subTotal = roundPrice(cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0));
 
-  return ( 
+  return (    
+    
       <div className={`cart ${isCartOpen ? 'cart--open' : ''}`}>     
         <div className="cart__header" onClick={handleClose}>
-          <img src={rightIcon}></img>
+          <img src={rightIcon} alt=''></img>
           <h2>SHOPPING CART</h2>
         </div>
         <div className="cart__content">
@@ -80,14 +81,14 @@ export default function Cart({handleClose}){
                 </div>          
                 <div id={product.id} onClick={handleRemove} className='cart__qty--remove'>
                   <p >remove</p>
-                  <img src={closeIcon}></img>
+                  <img src={closeIcon} alt=''></img>
                 </div>           
             </div>
             </>
           ))}      
         </div>
         <div className='cart__subtotal'>
-          <h2>SubTotal</h2>
+          <h3>SubTotal</h3>
           <h3> ${subTotal}</h3>
         </div>
         
@@ -98,5 +99,5 @@ export default function Cart({handleClose}){
           </button>
         </div>
       </div>
-  );
+  )
 }

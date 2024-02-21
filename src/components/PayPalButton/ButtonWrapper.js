@@ -11,7 +11,7 @@ export default function ButtonWrapper({ showSpinner }){
         "color":"silver",
         "shape":"pill"
     };
-    const baseUrl = "http://localhost:8080";
+    const baseUrl = "http://192.168.0.155:8080";
     
     async function createOrder() {
         const token = sessionStorage.getItem("authToken");

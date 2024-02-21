@@ -1,6 +1,6 @@
 import axios from "axios";
-const baseUrl = "http://localhost:8080";
-export const productImageBaseUrl="http://localhost:8080/images/products/";
+const baseUrl = "http://192.168.0.155:8080";
+export const productImageBaseUrl="http://192.168.0.155:8080/images/products/";
 
 
 export async function getProductsList(){ 

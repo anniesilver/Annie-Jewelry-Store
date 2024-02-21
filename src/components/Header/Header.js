@@ -12,11 +12,13 @@ import {getProfile} from "../Util/api";
 
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
-    const {cartList, setCartList} = useCart();
+    const [isAccountMenuOn,setIsAccountMenuOn] =useState(false);
+    const {cartList, setCartList,loginStatus,setLoginStatus} = useCart();    
     const [loginModal,setLoginModal]=useState(false);
     const [userInfo, setUserInfo] = useState({});
+   
   
-    async function decodeAuth(){
+    async function getUserProfile(){
         const decodeUser= await getProfile();
         console.log(decodeUser);
         if(decodeUser){
@@ -24,24 +26,20 @@ export default function Header(){
         }        
     }
     useEffect(() => { 
-        decodeAuth();
+        if(loginStatus){
+            getUserProfile();
+        }        
+        else{
+            setUserInfo({});
+        }
         const cartJSON = localStorage.getItem('AnnieSilverCart');
         if(cartJSON){            
             setCartList(JSON.parse(cartJSON));            
-        }       
-    }, []);   
+        } 
+    }, [loginStatus]);   
     
     const  handleCartClick = () => {      
         localStorage.setItem("isCartOpen","true");
- 
-        const retrievedValue = localStorage.getItem("isCartOpen");
-        console.log(retrievedValue);
-        // Correct comparison using strict equality
-        console.log(retrievedValue === "true"); // Output: true (if the stored value is "true")
-       
-        // Incorrect comparison due to type coercion
-        console.log(retrievedValue === true); // Output: true (string "tru      
-
         setCartList([...cartList]);        
     };
 
@@ -50,18 +48,29 @@ export default function Header(){
         setCartList([...cartList]);        
     }
     const handleLoginClick = () =>{
-        if(userInfo?.firstname){
-            console.log(userInfo.firstname);
-        }        
-        setLoginModal(true);
+        if(loginStatus){
+            console.log("loginModal",loginModal);
+            setIsAccountMenuOn(!isAccountMenuOn);
+            setLoginModal(false);
+        }   
+        else{
+            console.log("not logged in, show loginModal",loginModal);
+            setLoginModal(true);
+        }     
     }
-    function notifyParentRefresh(refresh){
-        if(refresh){
-            decodeAuth();
-        }
+    const handleLogout = () =>{
+        setLoginStatus(false);
+        setIsAccountMenuOn(false);
     }
 
-    const userLoggedIn = Boolean((userInfo?.firstname));
+    function closeLoginModal(refresh){
+        // if(refresh){
+        //     getUserProfile();
+        // }
+        setLoginModal(false);
+    }
+
+
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
 
     return(
@@ -74,13 +83,22 @@ export default function Header(){
                 <div className="header__account" onClick={handleLoginClick}>
                     <img src={myaccount} alt="Annie Jewelry Store"></img> 
                     { 
-                        userLoggedIn ? (
+                        loginStatus ? (
                             <p>{userInfo.firstname}</p>
                         ):(
                             <p>Login</p>
                         )             
                     }                           
                 </div> 
+                {
+                    isAccountMenuOn && (                    
+                        <div className="header__account--drop">
+                            <p>my account</p>
+                            <p>order history</p>
+                            {loginStatus && (<p onClick={handleLogout}>Logout</p>)}
+                        </div>
+                    )
+                }
                 <div className="header__cart" onClick={handleCartClick}>
                     <p>{totalQty}</p>
                     <img src={cart} alt="Annie Jewelry Store"></img>       
@@ -115,7 +133,7 @@ export default function Header(){
         )}     
         <Cart handleClose={handleCartClose}/>        
         {
-            loginModal && (<LoginModal notifyParentRefresh={notifyParentRefresh}/>)
+            loginModal && (<LoginModal closeLoginModal={closeLoginModal}/>)
         }     
     </header>
     )

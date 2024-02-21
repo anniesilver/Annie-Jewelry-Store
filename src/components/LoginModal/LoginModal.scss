@@ -11,32 +11,52 @@
   display: flex;
   background-color: rgba(19, 24, 44, 0.7);
 
-  @include tablet {
-    justify-content: center;
+  &__container {
+    background-color: rgba(255, 255, 255, 100);
+    position: absolute;
+    top: 20%;
+    left:30%;
+    height: 65%;
+    width: 35%;
+    z-index: 1050;
+    padding: 2rem;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h1{
+      padding:1rem;
+    }
+    input{
+      margin:1rem 0;
+      background-color: $AnnieSilver-Alabaster;
+      color:$AnnieSilver-Black;
+      height:$input-height;             
+      border: 1px solid $AnnieSilver-Mercury;
+      border-radius: $AnnieSilver-Radius;
+      width:100%;
+      padding-left:0.2rem;                 
+      ::focus{
+          border-color: $AnnieSilver-Purple;
+          outline: none;
+      }     
+    }
+    
   }
-
-&__container {
-  background-color: rgba(255, 255, 255, 100);
-  position: absolute;
-  top: 20%;
-  height: 20rem;
-  width: 30rem;
-  z-index: 1050;
-  padding: 2rem;
-  border: none;
-  input{
-    background-color: $AnnieSilver-Alabaster;
-    color:$AnnieSilver-Black;
-    height:$input-height;             
-    border: 1px solid $AnnieSilver-Mercury;
-    border-radius: $AnnieSilver-Radius;
-    width:100%;
-    padding-left:0.2rem;                 
-    ::focus{
-        border-color: $AnnieSilver-Purple;
-        outline: none;
-    }       
-}
-}
-
+  &__opt{
+    display: flex;
+    button{      
+      background: $AnnieSilver-Grey;
+      margin:1rem;
+      width:60%;
+      height:2.5rem;
+      border-radius:1.25rem;
+      border: 1px solid transparent;
+      color: white;
+      cursor: pointer;
+    }
+    h4{
+      cursor: pointer;
+    }
+  }
 }

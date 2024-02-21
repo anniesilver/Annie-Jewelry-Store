@@ -8,7 +8,7 @@ import { useState,useEffect } from "react";
 import LoginModal from "../../components/LoginModal/LoginModal";
 
 export default function Checkout(){
-    const {cartList, setCartList} = useCart();   
+    const {cartList, setCartList,loginStatus,setLoginStatus} = useCart();   
     const [loginModal,setLoginModal]=useState(false);
     const [userProfile,setUserProfile]=useState({});
     const PAYPAL_CLIENT_ID = 'ASrSf2BqxbJrKbOSEgVCGLqv_EBsnn_r2tRhW7okcHFAhvB4zz_VgqGrFmIQX5bf0VN0fxpLYxNOo9iV'
@@ -22,8 +22,14 @@ export default function Checkout(){
     const orderTotal = roundPrice(accumTotal + accumTotal*0.13 + shippingFee);
  
     useEffect(()=>{
+      if(loginStatus){
         getUserProfile();
-    },[])
+      }
+      else{
+        setUserProfile({});
+      }
+       
+    },[loginStatus])
 
     async function getUserProfile(){
       const decodeUser= await getProfile();
@@ -34,11 +40,8 @@ export default function Checkout(){
     function handleLoginClick(e){
       setLoginModal(true);
     }
-    function notifyParentRefresh(refresh){
-      setLoginModal(false);
-      getUserProfile();
-      //this line is to refresh header compenent to get the login user name displayed there.
-      setCartList([...cartList]);
+    function closeLoginModal(){
+      setLoginModal(false);    
     }
     return (
       <section className='checkout'> 
@@ -46,14 +49,14 @@ export default function Checkout(){
             <h1>Checkout</h1>
             <div className="checkout__contact">
             {
-                userProfile ? (
+                loginStatus ? (
                   <>
-                  <h4>Wwelcome back {userProfile.firstname} {userProfile.lastname}</h4>
-                  <h4>Contact email :{userProfile.email} </h4>
+                  <h3>Welcome back  {userProfile.firstname} {userProfile.lastname}</h3>
+                  <h3>Contact email :{userProfile.email} </h3>
                   </>
                 ):(
                   <>
-                  <h2>Have an account?</h2>
+                  <h3>Have an account?</h3>
                   <label onClick={handleLoginClick}>Login to checkout easily</label>   
                   </>   
                 )
@@ -76,8 +79,8 @@ export default function Checkout(){
             <div className="checkout__list">            
               {cartList.map((product,index) => (
                 <div className='checkout__item'>              
-                  <h5>{product.name}</h5>
-                  <h5>{product.price} x {product.qty}</h5>
+                  <p>{product.name}</p>
+                  <p>{product.price} x {product.qty}</p>
                 </div>          
               ))}      
             </div>
@@ -105,7 +108,7 @@ export default function Checkout(){
 
         </div>
         {
-            loginModal && (<LoginModal notifyParentRefresh={notifyParentRefresh}/>)
+            loginModal && (<LoginModal closeLoginModal={closeLoginModal}/>)
         }  
     </section>
     );

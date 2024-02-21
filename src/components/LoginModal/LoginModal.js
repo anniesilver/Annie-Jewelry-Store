@@ -2,13 +2,19 @@ import React from "react";
 import "./LoginModal.scss";
 import { useState} from "react";
 import {apiSignup,apiLogin} from "../Util/api";
+import { useCart } from '../CartProvider/CartProvider';
 
 
-export default function LoginModal({notifyParentRefresh}){
+export default function LoginModal({closeLoginModal}){
+    const {loginStatus,setLoginStatus} = useCart();
+    const [showSignup, setShowSignup] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoginError, setIsLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-  
+    
+    if(loginStatus){
+        closeLoginModal();
+    }
     const handleSignup = (e) => {
       e.preventDefault();
   
@@ -22,18 +28,20 @@ export default function LoginModal({notifyParentRefresh}){
                 firstname:e.target.firstname.value
             }
             console.log(user,"trying to sign up");
-          //const response = await axios.post("http://localhost:8080/users/signup",user);
           const response = await apiSignup(user);
           if(response.success)
           {
+            sessionStorage.authToken = response.token;
             setIsLoggedIn(true);
-            notifyParentRefresh(true);
+            setLoginStatus(true);
+            closeLoginModal();
           }
         }catch(e){
           console.error(e);
         }
       }
       signUp();
+
     };
   
     const handleLogin = (e) => {
@@ -46,13 +54,14 @@ export default function LoginModal({notifyParentRefresh}){
                 email:e.target.email.value, 
                 password:e.target.password.value
             }
-          //const response = await axios.post("http://localhost:8080/users/login",user);
+          
           const response = await apiLogin(user);
           if(response.token)
           {
             setIsLoggedIn(true);
             sessionStorage.authToken = response.token;
-            notifyParentRefresh(true);
+            setLoginStatus(true);
+            closeLoginModal();
           }
           else{
             setIsLoginError (true); 
@@ -63,30 +72,42 @@ export default function LoginModal({notifyParentRefresh}){
         }
       }
       login();
+      setShowSignup(false);
     };
-    const handleCancel = (e) => {
+    const handleLoginCancel = (e) => {
         setIsLoggedIn(true);
+        closeLoginModal();
     }
+    const handleSignUpCancel = (e) => {
+        setShowSignup(false);
+        closeLoginModal();
+    }
+    
+    const handleSignupClick = (e) => {
+        setShowSignup(true);        
+    }
+
+
   
     const renderSignUp = () => (
         <div className="modal">
             <div className="modal__container">
                 <h1>Sign Up</h1> 
                 <form onSubmit={handleSignup}>
-                    <div className="authform__input">
-                        Username: <input type="Email" name="email" />
+                    <div className="modal__input">
+                        <label>Username: </label><input type="Email" name="email" />
                     </div>
-                    <div className="authform__input">
-                        Password: <input type="password" name="password" />
+                    <div className="modal__input">
+                        <label>Password: </label><input type="password" name="password" />
                     </div>
-                    <div className="authform__input">
-                        Firstname: <input type="text" name="firstname" />
+                    <div className="modal__input">
+                        <label>Firstname:  </label><input type="text" name="firstname" />
                     </div>
-                    <div className="authform__input">
-                        Lastname: <input type="text" name="lastname" />
+                    <div className="modal__input">
+                        <label>Lastname:  </label> <input type="text" name="lastname" />
                     </div>
-                    <div className="authform__input">
-                        <button type="submit" onClick={handleCancel}>
+                    <div className="modal__opt">
+                        <button type="submit" onClick={handleSignUpCancel}>
                             Cancel
                         </button>
                         <button type="submit">
@@ -97,36 +118,37 @@ export default function LoginModal({notifyParentRefresh}){
             </div>
         </div>
     );
-  
+        
     const renderLogin = () => (
         <div className="modal">
             <div className="modal__container">
                 <h1>Login</h1>                       
                 {isLoginError && <label className="error">{errorMessage}</label>}
                 <form onSubmit={handleLogin}>
-                    <div className="authform">
+                    <div className="modal__input">
                         Username: <input type="Email" name="email" />
                     </div>
-                    <div className="authform">
+                    <div className="modal__input">
                         Password: <input type="password" name="password" />
                     </div>
-                    <div className="authform__op">
-                        <button type="submit" onClick={handleCancel}>
+                    <div className="modal__opt">
+                        <button type="submit" onClick={handleLoginCancel}>
                             Cancel
                         </button>
                         <button type="submit">
                             Login
                         </button>
                     </div>
-                    <label onClick={handleSignup}> Sign Up </label>
+                    <h4 onClick={handleSignupClick}> New customer? Sign Up Now </h4> 
                 </form>
             </div>
         </div>
     );
   
     // Handle the Signup/Login
+    if (showSignup) return renderSignUp();
     if (!isLoggedIn) return renderLogin();
-  
+    
  
     return(
         <></>

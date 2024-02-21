@@ -1,9 +1,9 @@
 @use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
 
-  
   .cart{
     position: fixed;
+
     top: 0;
     right: -20rem; /* Start off screen */
     width: 20rem;
@@ -18,8 +18,13 @@
       display: flex;
       justify-content: space-between;
       padding:1rem;
+      height:4rem;
       color:white;
       background-color: $AnnieSilver-Grey;
+      h2{
+        align-self: center;
+      }
+      cursor: pointer;
     }
 
     &--open {
@@ -71,6 +76,8 @@
         p{
             margin: 0;
             padding:0 5px;
+            cursor: pointer;
+            align-self: center;
         }
       }
 
@@ -80,12 +87,13 @@
         img,p{
           margin:0;
           pointer-events: none;
+          align-self: center;
         }
       }        
     }
     &__subtotal{
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between;      
     }
 
     hr{
@@ -94,6 +102,7 @@
     }
     h2,h3{
       padding: 0 1rem;
+      align-self: center;
     }
    
   }

@@ -56,7 +56,7 @@ export default function ShoppingCart(){
     
     const subTotal = roundPrice(accumTotal);
     const tax = roundPrice(accumTotal*0.13);
-    const shippingFee = roundPrice((accumTotal>100) ? 0 : 10);
+    const shippingFee = roundPrice((accumTotal<100 && accumTotal > 0) ? 10 : 0);
     const orderTotal = roundPrice(accumTotal + accumTotal*0.13 + shippingFee);
 
     return(
@@ -74,7 +74,7 @@ export default function ShoppingCart(){
                 </div>          
                 <div id={product.id} onClick={handleRemove} className='shoppingcart__qty--remove'>
                   <p >remove</p>
-                  <img src={closeIcon}></img>
+                  <img src={closeIcon} alt=''></img>
                 </div>           
               </div>
               
@@ -82,7 +82,7 @@ export default function ShoppingCart(){
           ))}      
         </div>
         <div className='shoppingcart__summary'>
-          <h2>Order Summary</h2>
+          <h2>Summary</h2>
           <ul>
             <li>subtotal</li>
             <li>${subTotal}</li>

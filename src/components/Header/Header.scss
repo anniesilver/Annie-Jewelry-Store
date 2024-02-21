@@ -1,5 +1,8 @@
 @use "../../styles/partials/_variables" as *;
 @use "../../styles/partials/_mixins" as *;
+
+@use "../../styles/global.scss";
+
 .header{
     display:flex;
     flex-direction: column;
@@ -102,8 +105,15 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
+        position: relative;
         p{
             margin:0 1rem;
+        }
+        &--drop{
+            position: absolute;
+            top: 42%;         
+            left: 85%;  
+            z-index: 100;
         }
     }
     &__cart{
