@@ -14,13 +14,24 @@
   &__container {
     background-color: rgba(255, 255, 255, 100);
     position: absolute;
-    top: 20%;
-    left:30%;
-    height: 65%;
-    width: 35%;
+    top: 15vw;
+    left:15vw;
+    width: 60vw;
+ 
+    @include tablet{
+      // top: 15%;
+      // left:30%;
+      // width: 35%;
+      // height: 60%;   
+      top: 15vw;
+      left:38vw;
+      width: 38vw;
+    }  
+    
     z-index: 1050;
     padding: 2rem;
-    border: none;
+    border: 1px solid $AnnieSilver-Mercury;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.8); /* Box shadow */
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -40,9 +51,9 @@
           border-color: $AnnieSilver-Purple;
           outline: none;
       }     
-    }
-    
+    }    
   }
+
   &__opt{
     display: flex;
     button{      
@@ -54,9 +65,12 @@
       border: 1px solid transparent;
       color: white;
       cursor: pointer;
+    }    
+    button:hover{
+      background: $AnnieSilver-Black;
     }
-    h4{
-      cursor: pointer;
-    }
+  }
+  h4{
+    cursor: pointer;
   }
 }

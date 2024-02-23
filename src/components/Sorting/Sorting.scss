@@ -1,0 +1,95 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+
+.sorting {
+  position: relative;
+ // width: 12rem;
+  display:flex;
+  align-self: flex-end;
+  padding:1rem;
+  &__label {
+    color: $AnnieSilver-Black;
+    // font-size: 0.8rem;
+    // font-weight: 600;
+    line-height: 1.4rem;
+    width: 100%;
+    padding: 0 1rem;
+
+    @include tablet {
+      font-size: 14px;
+      line-height: 1.6rem;
+    }
+
+    @include desktop {
+      line-height: 1.8rem;
+    }
+  }
+
+  &__input {
+    border-radius: 4px;
+    border: 1px solid $AnnieSilver-Grey ;
+    color: $AnnieSilver-Black;
+    background-color: $AnnieSilver-Alabaster;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    width: 100%;
+    padding: 0.21rem 0.7rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    &::after {
+      content: "";
+      background: url("../../assets/icon/drop_down.svg");
+      cursor: pointer;    
+      background-size: 1.1rem;
+      padding: 0.688rem 0.6rem;    
+   
+    }
+
+    @include tablet {
+      padding: 0.4rem 0.9rem;
+    }
+  }
+
+  &__selected {
+    flex: 1;
+  }
+
+  &__options {    
+    border-radius: 4px;
+    background-color: $AnnieSilver-Alabaster;   
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 3.3rem;
+    left: 4rem;
+    z-index: 1000;
+    overflow-y: auto;
+    
+  }
+
+  &__option {
+    padding: 0.25rem 0.9rem;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    cursor: pointer;
+
+    &:first-child {
+      padding-top: 0.5rem;
+    }
+
+    &:last-child {
+      padding-bottom: 0.5rem;
+    }
+  }
+
+  .dropdown__option:hover {
+    background-color:$AnnieSilver-Silver;
+  }
+  
+}

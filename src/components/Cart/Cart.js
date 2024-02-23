@@ -65,14 +65,12 @@ export default function Cart({handleClose}){
       <div className={`cart ${isCartOpen ? 'cart--open' : ''}`}>     
         <div className="cart__header" onClick={handleClose}>
           <img src={rightIcon} alt=''></img>
-          <h2>SHOPPING CART</h2>
+          <h2>MY CART</h2>
         </div>
         <div className="cart__content">
           {cartList.map((product,index) => (
             <>
-              <Link to={`/product/${product.id}`} key={product.id}>
-                      <ProductCard product={product} mode="line" />
-              </Link>     
+              <ProductCard product={product} mode="line" /> 
               <div className='cart__qty'>
                 <div className='cart__qty--update'>
                   <p id={product.id} onClick={handleAddOne}>+</p>
@@ -89,7 +87,7 @@ export default function Cart({handleClose}){
         </div>
         <div className='cart__subtotal'>
           <h3>SubTotal</h3>
-          <h3> ${subTotal}</h3>
+          <h4> ${subTotal}</h4>
         </div>
         
         <hr></hr>

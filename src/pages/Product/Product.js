@@ -87,14 +87,19 @@ export default function Product(){
               </div>
             </div>
           <div className="product__info">
-            <h1 className="product__info--name">{currentProduct.name}</h1>
+            <h2>{currentProduct.name}</h2>
+            <label>SKU: {currentProduct.sku}</label>
             <div className="product__info--bullet">
+              <ul>
               {currentProduct.bullet_point.map((line, index) => (
                     <li key={index}>{line}</li>
               ))}
+              </ul>
             </div>            
-            <p>Price: ${currentProduct.price}</p>
-            <button onClick={handleAddToCart}>Add to Cart</button>
+            <h3>Price: ${currentProduct.price}</h3>
+            <div className='product__info--button'>
+              <button onClick={handleAddToCart}><h3>Add to Cart</h3></button>
+            </div>
           </div>
         </div>   
       </>        

@@ -25,17 +25,21 @@ export default function Home(){
   
     return(
         <>
-        <div className="hero">
+        <section className="hero">
             <img src={bannerImg} alt="Annie Jewelry Store"></img>
             <h1>Valentine's Day Is Coming!</h1>
-        </div>
-        <div className='topsellers'>
+        </section>
+        <section className='topsellers'>            
+            <h1>Top Sellers</h1>
+            <div className='topsellers__list'>
             {productsList.map((product,index)=> (
-                <Link to={`/product/${product.id}`} key={product.id}>
-                    <ProductCard product={product} mode="block" />
-                </Link>     
+                <ProductCard product={product} mode="block" />
+                // <Link to={`/product/${product.id}`} key={product.id}>
+                //     <ProductCard product={product} mode="block" />
+                // </Link>     
             ))}        
-        </div>
+            </div>
+        </section>
         </>
     )
 }

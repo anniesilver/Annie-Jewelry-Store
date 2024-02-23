@@ -2,17 +2,21 @@
 @use "../../styles/partials/_mixins" as *;
 .shoppingcart{
     display: flex;   
+    flex-direction: column;
     padding:2rem;
+    @include tablet{
+      flex-direction:row;
+    }
 
     &__button{ 
       display: flex;
       justify-content: center;
 
       button{
-        background-color: $AnnieSilver-Purple;       
-        height:3rem;
+        background-color: $AnnieSilver-Purple;  
         width: 92%;
-        border-radius:5px;
+        height:$button-height;
+        border-radius:$button-radius;
         border: 1px solid transparent;
         cursor: pointer;
         h3{
@@ -24,47 +28,69 @@
 
     &__qty{
       display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: flex-start;
+      flex-direction: row;      
+      justify-content: flex-end;
+      align-items: baseline;
+      cursor: pointer;
+      @include tablet{
+        padding:1rem;
+        
+      }  
+  
 
-      padding:1rem;
       &--update{
         display: flex;
-        flex-direction: row;
         width:6rem;
-        font-size: medium;
         justify-content: space-around;
-        border:1px solid $AnnieSilver-Mercury;     
+        border:1px solid $AnnieSilver-Black;   
+        margin:1rem;
         p{
-            margin: 0;
-            padding:0 5px;
+          margin: 0;
+          padding:0 5px;
+          cursor: pointer;
+          align-self: center;
         }
       }
-
       &--remove{
         display:flex;
-        justify-content: flex-start;
-        p,img{
+
+        margin:0 1rem;
+        img{
+          align-self: center;
           margin:0;
           pointer-events: none;
         }
-
-      }        
+      }           
     }
     &__content{
         display: flex;
         flex-direction: column;
-        border-right: 1px solid $AnnieSilver-Mercury;
-        padding-right: 3rem;
+        @include tablet{
+          border-right: 1px solid $AnnieSilver-Mercury;
+          padding-right: 3rem;
+        }
+        
+        h2{
+          display: flex;
+          justify-content: center;
+          margin-bottom: 2rem;
+        }
     }
     &__item {
         display: flex;
-        justify-content: space-between;
+        flex-direction:column;
+        @include tablet{
+          flex-direction:row;
+          justify-content: space-between;
+        }
     }
     &__summary{     
+      padding: 1rem;
+      @include tablet{
         padding-left: 2rem;
         width: 35%;
+      }
+        
         h2{
           padding:0;
         }
@@ -79,14 +105,7 @@
         }
     }
     
-    hr{
-      color:$AnnieSilver-Mercury;
-      height:1px;
-    }
-    
-    p{
-        padding: 0 1rem;
-    }
+
    
   }
   

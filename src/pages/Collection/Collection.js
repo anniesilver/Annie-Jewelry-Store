@@ -1,14 +1,19 @@
-//import banner_1 from '../../assets/images/banner1.jpg';
+
 import './Collection.scss'
 import {useState,useEffect} from 'react'
 import { useParams,Link } from 'react-router-dom';
-import {getProductsList,getProudctsByCollection} from '../../components/Util/api';
+import {getProductsList,getProudctsByCollection,baseUrl} from '../../components/Util/api';
 import ProductCard from '../../components/ProductCard/ProductCard';
+import Sorting from '../../components/Sorting/Sorting';
+
 export default function Collection(){
+    const criteria = ["Bestsellers","New Arrival","Price:Low to High","Price:High to Low"];
+    const [selectedCriteria,setSelectedCriteria]=useState([criteria[0]]);
     const [productsList,setProductsList]=useState([]);
+    
     const {id} = useParams();
     const collection_id=parseInt(id);
-
+    
     useEffect(() => {  
         const  fetchData = async ()=>{    
             
@@ -49,13 +54,49 @@ export default function Collection(){
         }
         fetchData();
     }, [collection_id]); 
+
+    function onSelect(option){
+       
+        const c_index = criteria.indexOf(option);
+        if (c_index !== -1) {
+            console.log(c_index);            
+            criteria.unshift(criteria.splice(c_index, 1)[0]); // [0] is used to access the first element of the array returned by splice()
+            console.log(criteria);
+        }
+       
+        const sortedList = [...productsList];
+        switch (option){
+            case "Bestsellers":                
+                sortedList.sort((a, b) => a.sold - b.sold);   
+                setProductsList(sortedList);             
+                break;
+            case "Price:Low to High":                
+                sortedList.sort((a, b) => a.price - b.price);
+                setProductsList(sortedList);
+                break;
+            case "Price:High to Low":
+                sortedList.sort((a, b) => b.price - a.price);
+                setProductsList(sortedList);
+                break;
+            default:
+                break;                
+        }
+    }
     return(
-        <div className='collection'>
+        <section className='collection'>
+        <div className='collection__banner'>
+            <img src={baseUrl+"/images/banner/collection_"+collection_id+".jpg"} alt=""></img>
+        </div>
+        <Sorting 
+            criteria={criteria}
+            onSelect={onSelect}
+        />
+
+        <div className='collection__products'>
             {productsList.map((product,index)=> (
-                <Link to={`/product/${product.id}`} key={product.id}>
-                    <ProductCard product={product} mode="block" />
-                </Link>     
+                <ProductCard product={product} mode="block" />                
             ))}       
         </div>
+        </section>
     )
 }

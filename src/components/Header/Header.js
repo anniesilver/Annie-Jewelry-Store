@@ -69,7 +69,9 @@ export default function Header(){
         // }
         setLoginModal(false);
     }
-
+    function onMouseLeaveAccountDrop(){
+        setIsAccountMenuOn(false);
+    }
 
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
 
@@ -78,23 +80,21 @@ export default function Header(){
         <div className="header__container">
             <div className="header__logo">
                 <a href="/"><img src={logo} alt="Annie Jewelry Store"></img></a>           
-            </div>      
-            <div className="header__container--group">
+            </div>                  
+            <div className="header__group">                
                 <div className="header__account" onClick={handleLoginClick}>
-                    <img src={myaccount} alt="Annie Jewelry Store"></img> 
-                    { 
-                        loginStatus ? (
-                            <p>{userInfo.firstname}</p>
-                        ):(
-                            <p>Login</p>
-                        )             
-                    }                           
+                { 
+                    loginStatus && (
+                        <p>{userInfo.firstname}</p>
+                    )    
+                }                
+                    <img src={myaccount} alt=""></img>                                   
                 </div> 
                 {
                     isAccountMenuOn && (                    
-                        <div className="header__account--drop">
-                            <p>my account</p>
-                            <p>order history</p>
+                        <div className="header__account--drop" onMouseLeave={onMouseLeaveAccountDrop}>
+                            <p>My account</p>
+                            <p>Order history</p>
                             {loginStatus && (<p onClick={handleLogout}>Logout</p>)}
                         </div>
                     )
@@ -111,26 +111,29 @@ export default function Header(){
                     <Link to="/"><li>Home</li></Link>
                 </div> 
                 <div className="header__menu" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}}>   
-                    <Link to="/collection/0"><li>Category</li></Link>                    
+                
+                    <li>Collecitons</li>
+                    {isFloatingMenuOn && (      
+                        <div className="header__floating" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}} onClick={()=> {setisFloatingMenuOn(false)}} >
+                            <ul>
+                                <Link to="/collection/1"><li>Silver Collection</li></Link>
+                                <Link to="/collection/2"><li>Freshwater Pearl</li></Link>
+                                <Link to="/collection/3"><li>Golden Collection</li></Link>                 
+                            </ul>
+                        </div>
+                    )}      
+                   
                 </div> 
                 <div className="header__menu">   
-                    <Link to="/contactus"><li>Contact Us</li></Link>
+                    <Link to="/category"><li>Category</li></Link>
                 </div> 
-            </div>     
+            </div>       
             <div className="header__search">
                 <input type="search" placeholder="Search"/>   
                 <img src={search} alt="Search Annie Jewelry"></img>  
             </div>                                            
         </nav>   
-        {isFloatingMenuOn && (      
-            <div className="header__floating" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}} onClick={()=> {setisFloatingMenuOn(false)}} >
-                <ul>
-                    <Link to="/collection/1"><li>Silver Collection</li></Link>
-                    <Link to="/collection/2"><li>Freshwater Pearl</li></Link>
-                    <Link to="/collection/3"><li>Golden Collection</li></Link>                 
-                </ul>
-            </div>
-        )}     
+             
         <Cart handleClose={handleCartClose}/>        
         {
             loginModal && (<LoginModal closeLoginModal={closeLoginModal}/>)

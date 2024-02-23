@@ -95,16 +95,16 @@ export default function LoginModal({closeLoginModal}){
                 <h1>Sign Up</h1> 
                 <form onSubmit={handleSignup}>
                     <div className="modal__input">
-                        <label>Username: </label><input type="Email" name="email" />
+                        <label>Email: </label><input type="Email" name="email" />
+                    </div>                    
+                    <div className="modal__input">
+                        <label>First Name:  </label><input type="text" name="firstname" />
+                    </div>
+                    <div className="modal__input">
+                        <label>Last Name:  </label> <input type="text" name="lastname" />
                     </div>
                     <div className="modal__input">
                         <label>Password: </label><input type="password" name="password" />
-                    </div>
-                    <div className="modal__input">
-                        <label>Firstname:  </label><input type="text" name="firstname" />
-                    </div>
-                    <div className="modal__input">
-                        <label>Lastname:  </label> <input type="text" name="lastname" />
                     </div>
                     <div className="modal__opt">
                         <button type="submit" onClick={handleSignUpCancel}>
@@ -126,7 +126,7 @@ export default function LoginModal({closeLoginModal}){
                 {isLoginError && <label className="error">{errorMessage}</label>}
                 <form onSubmit={handleLogin}>
                     <div className="modal__input">
-                        Username: <input type="Email" name="email" />
+                        Email: <input type="Email" name="email" />
                     </div>
                     <div className="modal__input">
                         Password: <input type="password" name="password" />

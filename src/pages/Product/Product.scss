@@ -2,6 +2,37 @@
 @use "../../styles/partials/_mixins" as *;
 .product{
     display: flex;
+    flex-direction: column;
+    @include block_padding;
+    @include tablet{
+        flex-direction: row;
+    }
+    &__info{
+        display: flex;
+        flex-direction: column;
+        padding:1rem;
+        h2,label,li,h3{
+            margin:1rem;
+        }
+      
+        &--button{ 
+            display: flex;
+            justify-content: center;
+            margin: 1rem;
+            button{      
+              background: $AnnieSilver-Purple;
+              width:60%;
+              height:$button-height;
+              border-radius:$button-radius;
+              border: 1px solid transparent;
+              color: white;
+              cursor: pointer;
+              h3{
+                margin:0;
+              }
+            }
+          }
+    }
     &__images{
         display:flex;
         flex-direction: column;
@@ -9,6 +40,15 @@
         &--main{
             display: flex;
             border:1px solid $AnnieSilver-Mercury;
+            width: 100%;
+            @include tablet{
+                width: 30rem;
+            }
+            @include desktop{
+                width: 35rem;
+            }
+            
+           
            img{
             width:100%;
            }
@@ -23,10 +63,6 @@
                 width:5rem;
             }
         }
-        &__info{
-            display: flex;
-            flex-direction: column;
-        }
-
     }
+    
 }

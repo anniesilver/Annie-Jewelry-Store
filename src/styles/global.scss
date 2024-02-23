@@ -17,14 +17,15 @@ body {
 //     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 //       monospace;
 //   }
-  a{
+a{
     color:inherit;
     text-decoration: none;
-  }
-  label{
+}
+
+label{
     padding:0.5rem 0 ;
     color:$AnnieSilver-Black;
-  }
+}
 
 h1 {
     margin:1rem 0;
@@ -78,4 +79,10 @@ p{
         font-size: 0.875rem;
         font-weight: 400;   
     }    
+}
+
+
+hr{
+    color:$AnnieSilver-Grey;
+    height:1px;
 }

@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseUrl = "http://192.168.0.155:8080";
+export const baseUrl = "http://192.168.0.155:8080";
 export const productImageBaseUrl="http://192.168.0.155:8080/images/products/";
 
 

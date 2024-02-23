@@ -3,7 +3,6 @@
 
   .cart{
     position: fixed;
-
     top: 0;
     right: -20rem; /* Start off screen */
     width: 20rem;
@@ -11,18 +10,18 @@
     background-color:white;
     transition: right 0.5s ease-in-out;
     z-index: 9999;
-
     display: flex;   
     flex-direction: column;    
     &__header{
       display: flex;
-      justify-content: space-between;
       padding:1rem;
-      height:4rem;
+      height:4.5rem;
       color:white;
       background-color: $AnnieSilver-Grey;
       h2{
-        align-self: center;
+        display: flex;
+        align-items: center;
+        padding-left: 3rem;
       }
       cursor: pointer;
     }
@@ -45,17 +44,20 @@
     &__button{ 
       display: flex;
       justify-content: center;
-      
+      margin-bottom: 1rem;
       button{      
-        background: linear-gradient(135deg, #ffffff, $AnnieSilver-Purple, #ffffff);
+        background: $AnnieSilver-Grey;
         width:60%;
-        height:2.5rem;
-        border-radius:1.25rem;
+        height:$button-height;
+        border-radius:$button-radius;
         border: 1px solid transparent;
         color: white;
         cursor: pointer;
         h3{
           margin:0;
+        }
+        &:hover{
+          background: $AnnieSilver-Black;
         }
       }
     }
@@ -95,16 +97,9 @@
       display: flex;
       justify-content: space-between;      
     }
-
-    hr{
-      color:$AnnieSilver-Grey;
-      height:1px;
+    h3{
+      margin:1rem;
     }
-    h2,h3{
-      padding: 0 1rem;
-      align-self: center;
-    }
-   
   }
   
   

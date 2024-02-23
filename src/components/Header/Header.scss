@@ -13,21 +13,40 @@
         img{
             width:240px;
         }
+        @include tablet{
+            img{
+                width:320px;
+            }
+        }
+        
     }
     &__container{
         display: flex;
-        justify-content: space-between;
-        &--group{
-            display:flex;
-            justify-content: space-around;
+        flex-direction: column;
+        align-items: center;
+        @include block_padding;
+        @include tablet{
+            flex-direction: row;
+            justify-content: space-between;
         }
     }
+    &__group{
+        display:flex;
+        justify-content: flex-end;
+        width: 100%;
+        column-gap: 2rem;
+    }
+
 
     &__navbar{
         display: flex;
-        justify-content: space-between;
-        color:$AnnieSilver-Black;
+        justify-content: center;
         align-items: flex-end;
+        @include tablet{
+            justify-content: space-between;
+        }     
+        color:$AnnieSilver-Black;
+      
         ul{
             display:flex;
             margin:0;
@@ -37,23 +56,42 @@
         li{
             padding: 0 2rem;
             list-style: none;
+            font-size: 1.1rem;           
+            font-weight: 500;      
+            @include tablet{
+                font-size: 1.3rem;           
+                font-weight: 500;      
+            }   
+        }
+        li:hover{
+            color:$AnnieSilver-Grey;
         }
     }
     &__nav{
-        display: flex;        
+        display: flex;   
+        justify-content: space-between;   
     }
     &__menu{
         border-right:1px solid $AnnieSilver-Grey;
-        padding:0;
-        
-        &--focus{
-            position: relative;
+        padding:0;        
+        @include tablet{
+            &--focus{
+                position: relative;
+            }
         }
+        
     }
     &__floating{
         position: absolute;
-        top: 86%; 
-        left: 10%;
+        top: 95%; 
+        left: 40%;
+        @include tablet{
+            top: 86%; 
+            left: 18%;
+        }
+        @include desktop{
+            left: 14%;
+        }
         background-color:$AnnieSilver-Alabaster;
         border: 1px solid $AnnieSilver-Mercury;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -71,34 +109,45 @@
         li{
             padding: 5px;
             width: max-content;
+            font-size:0.9rem;
+            font-weight: 400;
             cursor: pointer;         
-            border-bottom: 1px solid $AnnieSilver-Purple;
+            border-bottom: 1px solid $AnnieSilver-Purple;           
+        }
+        li:hover{
+            border-bottom: 1px solid $AnnieSilver-Grey;
         }
     }
-    &__search{
-        display: flex;
-        align-items: center;
-        position: relative;
-        width: 40%;        
-        
-        input{
-            background-color: $AnnieSilver-Alabaster;
-            color:$AnnieSilver-Black;
-            height:$input-height;             
-            border: 1px solid $AnnieSilver-Mercury;
-            border-radius: $AnnieSilver-Radius;
-            width:100%;
-            padding-left:2.5rem;                 
-            ::focus{
-                border-color: $AnnieSilver-Purple;
-                outline: none;
-            }       
+    &__search{                
+        display: none;   
+        @include tablet{
+            display: flex;
+            align-items: center;
+            position: relative;
+            width: 40%;
         }
+  
+        @include tablet{
+            input{
+                display: flex;
+                background-color: $AnnieSilver-Alabaster;
+                color:$AnnieSilver-Purple;
+                height:$input-height;             
+                border: 1px solid $AnnieSilver-Mercury;
+                border-radius: $AnnieSilver-Radius;
+                width:100%;
+                padding-left:2.5rem;            
+            }             
+        }
+        input:focus{
+            border-color: $AnnieSilver-Purple;
+            outline: none;
+        }       
         img{
             position: absolute;
             top: 30%;         
-            left:3%;           
-        }
+            left:3%;                                 
+        }        
     }
 
     &__account{        
@@ -107,25 +156,38 @@
         align-items: center;
         position: relative;
         p{
-            margin:0 1rem;
+            display: none;           
+            @include tablet{
+                margin:0 1rem;
+                display: flex;
+            }
         }
         &--drop{
             position: absolute;
-            top: 42%;         
-            left: 85%;  
+            background-color:$AnnieSilver-Alabaster;
+            border: 1px solid $AnnieSilver-Mercury;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            top: 48%;         
+            left: 80%;  
             z-index: 100;
+            p{
+                cursor: pointer;         
+                border-bottom: 1px solid $AnnieSilver-Purple;
+            }
+            p:hover{
+                border-bottom: 1px solid $AnnieSilver-Grey;
+            }
         }
     }
     &__cart{
         display: flex;
-        align-items: center;
         position: relative;
         cursor: pointer; 
         p{
             position: absolute;
-            top: 17%;         
-            left: 53%;    
-            font-size: smaller;
+            top: 7%;         
+            left: 53%;      
             font-weight: 400;
         }
     }

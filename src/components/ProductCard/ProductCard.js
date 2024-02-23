@@ -1,7 +1,9 @@
 import {productImageBaseUrl} from '../Util/api';
+import { useNavigate } from 'react-router-dom';
 import './ProductCard.scss'
 export default function ProductCard({product,mode}){
     let usingClass='';
+    const navigate=useNavigate();
     switch(mode){
         case 'block':
             usingClass = "productcard__block";
@@ -12,9 +14,12 @@ export default function ProductCard({product,mode}){
         default:
             usingClass = ''
     }
+    function onClick(e){
+        navigate(`/product/${product.id}`);
+    }
 
     return(
-        <div className={usingClass}>
+        <div className={usingClass} id={product.id} onClick={onClick}>
             <img src={productImageBaseUrl+product.main_img} alt={product.name}></img>
             <div className="productcard__info">            
                 <p>{product.name}</p>              

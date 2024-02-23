@@ -82,7 +82,7 @@ export default function ShoppingCart(){
           ))}      
         </div>
         <div className='shoppingcart__summary'>
-          <h2>Summary</h2>
+          <h3>Summary</h3>
           <ul>
             <li>subtotal</li>
             <li>${subTotal}</li>
