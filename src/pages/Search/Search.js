@@ -14,8 +14,7 @@ export default function Search(){
     
     useEffect(() => {  
         const  fetchData = async ()=>{ 
-                try{
-                    console.log("in search result page, keywords:",searchKeywords)
+                try{  
                     const list = await searchProducts(searchKeywords); 
                     if(list){
                         setProductsList(list);
@@ -33,10 +32,9 @@ export default function Search(){
 
     function onSelect(option){       
         const c_index = criteria.indexOf(option);
-        if (c_index !== -1) {
-            console.log(c_index);            
-            criteria.unshift(criteria.splice(c_index, 1)[0]); // [0] is used to access the first element of the array returned by splice()
-            console.log(criteria);
+        if (c_index !== -1) {      
+            criteria.unshift(criteria.splice(c_index, 1)[0]); 
+
         }       
         const sortedList = [...productsList];
         switch (option){

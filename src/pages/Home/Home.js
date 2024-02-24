@@ -7,7 +7,6 @@ import ProductCard from '../../components/ProductCard/ProductCard';
 
 
 export default function Home(){
-   // const [startIndex,setStartIndex]=useState(0);
     const [productsList,setProductsList]=useState([]);
     useEffect(() => {  
         const  fetchData = async ()=>{    
@@ -33,10 +32,7 @@ export default function Home(){
             <h1>Top Sellers</h1>
             <div className='topsellers__list'>
             {productsList.map((product,index)=> (
-                <ProductCard product={product} mode="block" />
-                // <Link to={`/product/${product.id}`} key={product.id}>
-                //     <ProductCard product={product} mode="block" />
-                // </Link>     
+                <ProductCard product={product} mode="block" /> 
             ))}        
             </div>
         </section>

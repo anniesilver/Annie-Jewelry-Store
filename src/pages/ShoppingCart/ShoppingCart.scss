@@ -24,6 +24,9 @@
           color:white;
         }
       }
+      button:hover{
+        background: $AnnieSilver-DarkPurple;
+      }
     }
 
     &__qty{
@@ -103,9 +106,6 @@
           list-style: none;
           
         }
-    }
-    
-
-   
+    }   
   }
   

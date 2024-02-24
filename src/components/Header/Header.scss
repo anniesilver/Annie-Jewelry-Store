@@ -57,7 +57,7 @@
             padding: 0 2rem;
             list-style: none;
             font-size: 1.1rem;           
-            font-weight: 500;      
+            font-weight: 500;            
             @include tablet{
                 font-size: 1.3rem;           
                 font-weight: 500;      
@@ -65,7 +65,9 @@
         }
         li:hover{
             color:$AnnieSilver-Grey;
+            cursor:pointer;
         }
+
     }
     &__nav{
         display: flex;   
@@ -74,20 +76,19 @@
     &__menu{
         border-right:1px solid $AnnieSilver-Grey;
         padding:0;        
-        @include tablet{
-            &--focus{
-                position: relative;
-            }
+        position:relative;
+        &--highlight{
+            color: $AnnieSilver-Grey;
         }
         
     }
     &__floating{
         position: absolute;
-        top: 95%; 
-        left: 40%;
+        top: 93%; 
+        left: 50%;
         @include tablet{
-            top: 86%; 
-            left: 18%;
+            top: 89%; 
+            left: 20%;
         }
         @include desktop{
             left: 14%;
@@ -131,7 +132,7 @@
             input{
                 display: flex;
                 background-color: $AnnieSilver-Alabaster;
-                color:$AnnieSilver-Purple;
+                color:$AnnieSilver-Black;
                 height:$input-height;             
                 border: 1px solid $AnnieSilver-Mercury;
                 border-radius: $AnnieSilver-Radius;

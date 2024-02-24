@@ -3,6 +3,10 @@
 
 .collection{
     &__banner{
+        padding:1rem;
+        @include tablet{
+            padding: 0 2rem;
+        }
         img{
             width: 100%;
         }

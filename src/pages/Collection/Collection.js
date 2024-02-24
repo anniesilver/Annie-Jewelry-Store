@@ -58,10 +58,8 @@ export default function Collection(){
     function onSelect(option){
        
         const c_index = criteria.indexOf(option);
-        if (c_index !== -1) {
-            console.log(c_index);            
+        if (c_index !== -1) {         
             criteria.unshift(criteria.splice(c_index, 1)[0]); // [0] is used to access the first element of the array returned by splice()
-            console.log(criteria);
         }
        
         const sortedList = [...productsList];

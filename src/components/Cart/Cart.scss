@@ -55,10 +55,10 @@
         cursor: pointer;
         h3{
           margin:0;
-        }
-        &:hover{
-          background: $AnnieSilver-Black;
-        }
+        }     
+      }
+      button:hover{
+        background: $AnnieSilver-LightGrey;
       }
     }
 

@@ -26,9 +26,6 @@ export default function PaypalButtonWrapper({ showSpinner }){
             },            
             body: JSON.stringify(cartList),
           });
-          // console.log("before loading paypal button, the cartList",cartList);
-          // const orderData = await axios.post(`${baseUrl}/orders`,cartList);
-          // console.log("reponse order id from local server",orderData.id)
           const orderData = await response.json();
           if (orderData.id) {
             return orderData.id;
@@ -48,7 +45,6 @@ export default function PaypalButtonWrapper({ showSpinner }){
     async function onApprove(data, actions) { 
         const token = sessionStorage.getItem("authToken");
         try {
-          console.log("paypal order id been created",data);
           const response = await fetch(`${baseUrl}/orders/${data.orderID}/capture`, {
             method: "POST",
             headers: {
@@ -58,7 +54,6 @@ export default function PaypalButtonWrapper({ showSpinner }){
           });
     
           const orderData = await response.json();
-          console.log("we got the reponse from my server",orderData);
           // Three cases to handle:
           //   (1) Recoverable INSTRUMENT_DECLINED -> call actions.restart()
           //   (2) Other non-recoverable errors -> Show a failure message
@@ -81,16 +76,12 @@ export default function PaypalButtonWrapper({ showSpinner }){
             const transaction =
               orderData?.purchase_units?.[0]?.payments?.captures?.[0] ||
               orderData?.purchase_units?.[0]?.payments?.authorizations?.[0];
+            const ordderNumber = orderData?.id;
             resultMessage(
-              `Transaction ${transaction.status}: ${transaction.id}<br><br>See console for all available details`,
+              `Transaction ${transaction.status}: ${transaction.id}<br><br>Your Order ${ordderNumber} is now in processing for shipping`,
             );
             //transaction succeed, empty shopping cart for now
-            setCartList([]);
-            console.log(
-              "Capture result",
-              orderData,
-              JSON.stringify(orderData, null, 2),
-            );
+            setCartList([]);            
           }
         } catch (error) {
           console.error(error);          

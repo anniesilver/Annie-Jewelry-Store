@@ -7,6 +7,9 @@
   display:flex;
   align-self: flex-end;
   padding:1rem;
+  @include tablet{
+    padding: 2rem;
+  }
   &__label {
     color: $AnnieSilver-Black;
     // font-size: 0.8rem;

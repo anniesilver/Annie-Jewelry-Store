@@ -27,7 +27,6 @@ export default function LoginModal({closeLoginModal}){
                 lastname:e.target.lastname.value, 
                 firstname:e.target.firstname.value
             }
-            console.log(user,"trying to sign up");
           const response = await apiSignup(user);
           if(response.success)
           {
@@ -108,10 +107,10 @@ export default function LoginModal({closeLoginModal}){
                     </div>
                     <div className="modal__opt">
                         <button type="submit" onClick={handleSignUpCancel}>
-                            Cancel
+                        <h4>Cancel</h4>
                         </button>
                         <button type="submit">
-                            Sign Up
+                        <h4>Sign Up</h4>   
                         </button>
                     </div>
                 </form>
@@ -133,13 +132,13 @@ export default function LoginModal({closeLoginModal}){
                     </div>
                     <div className="modal__opt">
                         <button type="submit" onClick={handleLoginCancel}>
-                            Cancel
+                            <h4>Cancel</h4>
                         </button>
                         <button type="submit">
-                            Login
+                            <h4>Login</h4>                            
                         </button>
                     </div>
-                    <h4 onClick={handleSignupClick}> New customer? Sign Up Now </h4> 
+                    <h5 onClick={handleSignupClick}> New customer? Sign Up Now </h5> 
                 </form>
             </div>
         </div>

@@ -3,7 +3,7 @@ import logo from '../../assets/logo/LOGO.jpg';
 import myaccount from '../../assets/icon/account.svg';
 import cart from '../../assets/icon/cart.svg';
 import search from '../../assets/icon/search.svg';
-import {Link,useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
 import {useState,useEffect} from 'react';
@@ -20,7 +20,6 @@ export default function Header(){
   
     async function getUserProfile(){
         const decodeUser= await getProfile();
-        console.log(decodeUser);
         if(decodeUser){
             setUserInfo(decodeUser); 
         }        
@@ -48,13 +47,11 @@ export default function Header(){
         setCartList([...cartList]);        
     }
     const handleLoginClick = () =>{
-        if(loginStatus){
-            console.log("loginModal",loginModal);
+        if(loginStatus){   
             setIsAccountMenuOn(!isAccountMenuOn);
             setLoginModal(false);
         }   
-        else{
-            console.log("not logged in, show loginModal",loginModal);
+        else{ 
             setLoginModal(true);
         }     
     }
@@ -63,31 +60,58 @@ export default function Header(){
         setIsAccountMenuOn(false);
     }
 
-    function closeLoginModal(refresh){
-        // if(refresh){
-        //     getUserProfile();
-        // }
+    function closeLoginModal(){
         setLoginModal(false);
     }
     function onMouseLeaveAccountDrop(){
         setIsAccountMenuOn(false);
     }
     function handleSearchKeyDown(e){        
-        if(e.keyCode === 13){
-            console.log(e.target);      
-            console.log(e.target.value);
-            const keywrods= e.target.value.split(" ").filter(word => word !== "");
-            console.log("from inout string to array:keywords",keywrods);      
+        if(e.keyCode === 13){  
+            const keywrods= e.target.value.split(" ").filter(word => word !== ""); 
             setSearchKeywords(keywrods);
             navigate('/search');
             e.target.value="";
         }         
     }
-    
-    function handleSearchFocus(e){
-        e.target.value="";
+    function handleMenuClick(e){
+        if(e.target.id==="menu_home"){
+            if(!e.target.classList.contains("header__menu--highlight")){
+                e.target.classList.add("header__menu--highlight");
+                document.getElementById("menu_collection").classList.remove("header__menu--highlight");
+            }    
+            navigate('/');        
+        }
+        if(e.target.id==="menu_collection"){
+            if(!e.target.classList.contains("header__menu--highlight")){
+                e.target.classList.add("header__menu--highlight");
+                document.getElementById("menu_home").classList.remove("header__menu--highlight");
+            }          
+            navigate('/collection/0');      
+        }
+        if(e.target.id==="collection_1"){
+            if(document.getElementById("menu_home").classList.contains("header__menu--highlight")){
+                document.getElementById("menu_home").classList.remove("header__menu--highlight");
+                document.getElementById("menu_collection").classList.add("header__menu--highlight");
+            }            
+            navigate('/collection/1');      
+        }
+        if(e.target.id==="collection_2"){
+            if(document.getElementById("menu_home").classList.contains("header__menu--highlight")){
+                document.getElementById("menu_home").classList.remove("header__menu--highlight");
+                document.getElementById("menu_collection").classList.add("header__menu--highlight");
+            }            
+            navigate('/collection/2');      
+        }
+        if(e.target.id==="collection_3"){
+            if(document.getElementById("menu_home").classList.contains("header__menu--highlight")){
+                document.getElementById("menu_home").classList.remove("header__menu--highlight");
+                document.getElementById("menu_collection").classList.add("header__menu--highlight");
+            }            
+            navigate('/collection/3');      
+        }
     }
-
+       
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
 
     return(
@@ -122,29 +146,26 @@ export default function Header(){
         </div>                 
         <nav className="header__navbar"> 
             <div className="header__nav"> 
-                <div className="header__menu">             
-                    <Link to="/"><li>Home</li></Link>
+            <div className="header__menu">             
+                    <li id="menu_home" onClick={handleMenuClick}>Home</li>
                 </div> 
                 <div className="header__menu" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}}>   
                 
-                    <li>Collecitons</li>
+                    <li id="menu_collection" onClick={handleMenuClick} >Collecitons</li>
                     {isFloatingMenuOn && (      
                         <div className="header__floating" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}} onClick={()=> {setisFloatingMenuOn(false)}} >
                             <ul>
-                                <Link to="/collection/1"><li>Silver Collection</li></Link>
-                                <Link to="/collection/2"><li>Freshwater Pearl</li></Link>
-                                <Link to="/collection/3"><li>Golden Collection</li></Link>                 
+                                <li id="collection_1" onClick={handleMenuClick}>Silver Collection</li>
+                                <li id="collection_2" onClick={handleMenuClick}>Freshwater Pearl</li>
+                                <li id="collection_3" onClick={handleMenuClick}>Golden Collection</li>
                             </ul>
                         </div>
                     )}      
                    
                 </div> 
-                <div className="header__menu">   
-                    <Link to="/category"><li>Category</li></Link>
-                </div> 
             </div>       
             <div className="header__search">
-                <input type="search" placeholder="Search" onFocus={handleSearchFocus} onKeyDown={handleSearchKeyDown}/>   
+                <input type="search" placeholder="Search" onKeyDown={handleSearchKeyDown}/>   
                 <img src={search} alt="Search Annie Jewelry"></img>  
             </div>                                            
         </nav>   

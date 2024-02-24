@@ -4,6 +4,11 @@
     display: flex;
     color:$AnnieSilver-Black;
     position:relative;
+    padding:0 1rem;
+    @include tablet{
+        padding:0 2rem;
+    }
+    
     h1{
         position: absolute;
         top: 22%; 
