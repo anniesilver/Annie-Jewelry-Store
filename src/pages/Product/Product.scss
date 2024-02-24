@@ -36,7 +36,10 @@
     &__images{
         display:flex;
         flex-direction: column;
-        padding:2rem;
+        padding:1rem;
+        @include tablet{
+            padding:2rem;
+        }
         &--main{
             display: flex;
             border:1px solid $AnnieSilver-Mercury;

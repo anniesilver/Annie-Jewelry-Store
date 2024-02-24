@@ -1,8 +1,8 @@
 // Custom component to wrap the PayPalButtons and show loading spinner
 import {PayPalButtons,usePayPalScriptReducer} from "@paypal/react-paypal-js";
-import {useCart} from '../../components/CartProvider/CartProvider';
+import {useCart} from '../CartProvider/CartProvider';
 
-export default function ButtonWrapper({ showSpinner }){
+export default function PaypalButtonWrapper({ showSpinner }){
     const [{ isPending }] = usePayPalScriptReducer();
     const {cartList, setCartList} = useCart();
     // This value is from the props in the UI

@@ -1,6 +1,6 @@
 import "./Checkout.scss";
 import { useCart } from '../../components/CartProvider/CartProvider';
-import ButtonWrapper from '../../components/PayPalButton/ButtonWrapper';
+import PaypalButtonWrapper from '../../components/PaypalButtonWrapper/PaypalButtonWrapper';
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import {roundPrice} from '../../components/Util/util';
 import {getProfile} from "../../components/Util/api";
@@ -8,7 +8,8 @@ import { useState,useEffect } from "react";
 import LoginModal from "../../components/LoginModal/LoginModal";
 
 export default function Checkout(){
-    const {cartList, setCartList,loginStatus,setLoginStatus} = useCart();   
+    const {cartList, loginStatus} = useCart();   
+    const isCartEmpty = Boolean(cartList.length === 0);
     const [loginModal,setLoginModal]=useState(false);
     const [userProfile,setUserProfile]=useState({});
     const PAYPAL_CLIENT_ID = 'ASrSf2BqxbJrKbOSEgVCGLqv_EBsnn_r2tRhW7okcHFAhvB4zz_VgqGrFmIQX5bf0VN0fxpLYxNOo9iV'
@@ -66,47 +67,51 @@ export default function Checkout(){
             <div className="checkout__paypal--container">
             <div style={{maxWidth:"750px", minHeight:"200px"}}>
                 <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, components: "buttons", currency: "CAD" }}>
-                    <ButtonWrapper showSpinner={false} />
+                    <PaypalButtonWrapper showSpinner={false} />
                 </PayPalScriptProvider>
             </div>
             </div>
           </div>
-          <div className='checkout__info'>
-            <div className="checkout__info--header">
-              <h3>Summary</h3>
-              <h4>({itemTotal} Items)</h4>
-            </div>            
-            <div className="checkout__list">            
-              {cartList.map((product,index) => (
-                <div className='checkout__item'>              
-                  <p>{product.name}</p>
-                  <p>{product.price} x {product.qty}</p>
-                </div>          
-              ))}      
-            </div>
-            
-            <div className='checkout__summary'>   
-            <hr></hr>     
-              <ul>
-                <p>subtotal</p>
-                <p>${subTotal}</p>
-              </ul>
-              <ul>
-                <p>shipping</p>
-                <p>${shippingFee}</p>
-              </ul>
-              <ul>
-                <p>tax</p>
-                <p>${tax}</p>
-              </ul>
-              <hr></hr>
-              <ul>
-                <h3>Order Total</h3>
-                <h4>CAD ${orderTotal}</h4>
-              </ul>          
-            </div>
+          {
+              !isCartEmpty && (
+              <div className='checkout__info'>
+                <div className="checkout__info--header">
+                  <h3>Summary</h3>
+                  <h4>({itemTotal} Items)</h4>
+                </div>            
+                <div className="checkout__list">            
+                  {cartList.map((product,index) => (
+                    <div className='checkout__item'>              
+                      <p>{product.name}</p>
+                      <p>{product.price} x {product.qty}</p>
+                    </div>          
+                  ))}      
+                </div>
+              
+                    <div className='checkout__summary'>   
+                      <hr></hr>     
+                      <ul>
+                        <p>subtotal</p>
+                        <p>${subTotal}</p>
+                      </ul>
+                      <ul>
+                        <p>shipping</p>
+                        <p>${shippingFee}</p>
+                      </ul>
+                      <ul>
+                        <p>tax</p>
+                        <p>${tax}</p>
+                      </ul>
+                      <hr></hr>
+                      <ul>
+                        <h3>Order Total</h3>
+                        <h4>CAD ${orderTotal}</h4>
+                      </ul>          
+                  </div>
+        
 
-        </div>
+              </div>)
+          }
         {
             loginModal && (<LoginModal closeLoginModal={closeLoginModal}/>)
         }  

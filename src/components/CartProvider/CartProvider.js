@@ -7,8 +7,9 @@ const CartContext = createContext();
 const CartProvider = ({ children }) => {
   const [cartList, setCartList] = useState([]);
   const [loginStatus, setLoginStatus] = useState(false);
+  const [searchKeywords, setSearchKeywords] = useState(false);
   return (
-    <CartContext.Provider value={{ cartList, setCartList, loginStatus,setLoginStatus }}>
+    <CartContext.Provider value={{ cartList, setCartList, loginStatus,setLoginStatus,searchKeywords, setSearchKeywords}}>
       {children}
     </CartContext.Provider>
   );

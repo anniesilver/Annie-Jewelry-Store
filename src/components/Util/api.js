@@ -3,6 +3,25 @@ export const baseUrl = "http://192.168.0.155:8080";
 export const productImageBaseUrl="http://192.168.0.155:8080/images/products/";
 
 
+export async function searchProducts(keywords){ 
+    const URI=`${baseUrl}/search`;  
+    try {          
+        console.log("========== keywords list",keywords);
+        const response = await axios.get(`${URI}`,{
+            params: {
+                keywords: keywords                
+                // Add more parameters as needed
+              }            
+        });    
+
+        
+        console.log(response.data);
+        return response.data;
+    } catch (err) {
+        console.log('Error when searching products.  try again pls');
+        console.error(err);
+    }
+}
 export async function getProductsList(){ 
     const URI=`${baseUrl}/products/li`;  
     try {          
@@ -25,24 +44,13 @@ export async function getTopSellers(limit){
     }
 }
 
-export async function getProudctsByCategory(category_id){ 
-    const URI=`${baseUrl}/products/ct/${category_id}`;  
-    try {
-        const response = await axios.get(`${URI}`);
-        return response.data;
-    } catch (err) {
-        console.log('Error when retrieving Top sellers. try again pls');
-        console.error(err);
-    }
-}
-
 export async function getProudctsByCollection(collection_id){ 
     const URI=`${baseUrl}/products/cl/${collection_id}`;  
     try {
         const response = await axios.get(`${URI}`);
         return response.data;
     } catch (err) {
-        console.log('Error when retrieving Top sellers. try again pls');
+        console.log('Error when retrieving product by collection. try again pls');
         console.error(err);
     }
 }

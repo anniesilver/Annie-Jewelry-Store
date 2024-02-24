@@ -1,0 +1,19 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+.search{
+    display: flex;
+    flex-direction: column;
+    &__products{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        @include block_padding;
+        column-gap: 2rem;
+    }
+    h1{
+        align-self: center;
+    }
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

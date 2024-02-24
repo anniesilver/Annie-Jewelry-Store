@@ -1,0 +1,12 @@
+@use "../../styles/partials/_variables" as *;
+@use "../../styles/partials/_mixins" as *;
+.footer{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    color:$AnnieSilver-Black;
+    p{
+        margin:0;
+    }
+}

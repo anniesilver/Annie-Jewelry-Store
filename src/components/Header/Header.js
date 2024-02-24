@@ -3,7 +3,7 @@ import logo from '../../assets/logo/LOGO.jpg';
 import myaccount from '../../assets/icon/account.svg';
 import cart from '../../assets/icon/cart.svg';
 import search from '../../assets/icon/search.svg';
-import {Link} from 'react-router-dom';
+import {Link,useNavigate} from 'react-router-dom';
 import {useCart} from '../../components/CartProvider/CartProvider';
 import Cart from '../../components/Cart/Cart';
 import {useState,useEffect} from 'react';
@@ -13,10 +13,10 @@ import {getProfile} from "../Util/api";
 export default function Header(){
     const [isFloatingMenuOn,setisFloatingMenuOn]=useState(false);
     const [isAccountMenuOn,setIsAccountMenuOn] =useState(false);
-    const {cartList, setCartList,loginStatus,setLoginStatus} = useCart();    
+    const {cartList, setCartList,loginStatus,setLoginStatus,setSearchKeywords} = useCart();    
     const [loginModal,setLoginModal]=useState(false);
     const [userInfo, setUserInfo] = useState({});
-   
+    const navigate = useNavigate();
   
     async function getUserProfile(){
         const decodeUser= await getProfile();
@@ -71,6 +71,21 @@ export default function Header(){
     }
     function onMouseLeaveAccountDrop(){
         setIsAccountMenuOn(false);
+    }
+    function handleSearchKeyDown(e){        
+        if(e.keyCode === 13){
+            console.log(e.target);      
+            console.log(e.target.value);
+            const keywrods= e.target.value.split(" ").filter(word => word !== "");
+            console.log("from inout string to array:keywords",keywrods);      
+            setSearchKeywords(keywrods);
+            navigate('/search');
+            e.target.value="";
+        }         
+    }
+    
+    function handleSearchFocus(e){
+        e.target.value="";
     }
 
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
@@ -129,7 +144,7 @@ export default function Header(){
                 </div> 
             </div>       
             <div className="header__search">
-                <input type="search" placeholder="Search"/>   
+                <input type="search" placeholder="Search" onFocus={handleSearchFocus} onKeyDown={handleSearchKeyDown}/>   
                 <img src={search} alt="Search Annie Jewelry"></img>  
             </div>                                            
         </nav>   
