@@ -1,70 +1,238 @@
-# Getting Started with Create React App
+# Project Title
+ANNIE'S JEWLERY STORE
+## Overview
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+it's an online jewelry shop of own branded jewelry
 
-## Available Scripts
+### Problem
 
-In the project directory, you can run:
+I have been doing online jewelry retail business for many year. Currently I don't have a independant website for this business.
+I used third-party plateform like wix and shopify , they were good but not that easy to do personalization,say if i want to lauch some special marketing program,
+it's very difficult to do some function for it.
+I also sell on amazon, So develop a website of my own , it will have better chance to interating my sale with my amzazon store in the future 
 
-### `npm start`
+### User Profile
+Almost every adult have chance to buy jewelry, either for themselves or as gift for their friends, lovers, families, classmate etc.
+Let users easy find what they like ,show them quality pictures of products and detail information, promote strategy can be implemented in my website too.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Features
+| feature   |
+| ------------- | 
+| Product collection browse , sorting by different criteria|
+| Product detail viewing and comments  |
+| add products to shopping cart ,modify cart|
+| checkout and pay with creditcard , placing order  |
+| user sign up and login auth |
+| Search products by keywords  |
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Implementation
 
-### `npm test`
+### Tech Stack
+| key point    | Tech Stack  |
+| -------------|------------ | 
+| FRONT END | React | 
+| Styling | SASS | 
+| Multi device| Responsive Desgin | 
+| BACK END  | Node.js | 
+| REST API  | express  |  
+| Knex | SQL |
+| DATABASE | MYSQL | 
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
+### APIs
+NEED TO BUILD MY OWN API
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Sitemap
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+-Homepage  
+-Collection  
+-Search
+-Product  
+-ViewCart  
+-Checkout  
+-Sign up  
+-Login
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Mockups
 
-### `npm run eject`
+![home page](/images/home.jpg)
+![collection page](/images/category.jpg)
+![floating cart layer](/images/floating-cart.jpg)
+![product page](/images/product.jpg)
+![shopping cart page](/images/shoppingcart.jpg)
+![sgin up page](/images/signup.jpg)
+![login in page](/images/login.jpg)
+![check out page](/images/checkout.jpg)
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Data
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![Database Design](/images/database.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Endpoints
+--------------------------------------------------------------------
+```
+GET /products
+returns a list of proudcts which contains limit number of product
+contains only information for snapshot productcard
+repoonse sample 
+[
+    {
+    "sku": "200901041113"，
+    "name":"18K Gold Akoya Pearl earstuds”，
+    "main_img":"/images/sku.main.jpg",
+    "other_img":["sku.01.jpg","sku.02.jpg","sku.03.jpg"]
+    "price":199.99
+    "sold":20,
+    "discount_price":169.99,
+    "bullet_point:["sell poin 1","sell point 2"]
+    },
+]
+```
+--------------------------------------------------------------------
+```
+GET /proudcts/:sku
+returns a detail data object for one product identified by the sku
+response sample
+{
+    "sku": "200901041113"，
+    "title":"18K Gold Akoya Pearl earstuds”，    
+    "main_img":"/images/sku.main.jpg",
+    "other_img":["sku.01.jpg"，"sku.02.jpg"],
+    "price":199.99,
+    "description":"this product is build with Akoya sea cultured pearl and 18K Gold. The pearl size around 5mm in dirameters."
+    "category":["pearl","18kGold"],
+    "comments":[
+        {
+            "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818",
+            "name":"Jessie",            
+            "comment":"this is a very beautiful pearl",
+            "timestamp":"1545162149000"
+        },
+    ],
+    "sales":20,
+    "stock":5
+}
+```
+--------------------------------------------------------------------
+```
+POST /product/:sku/comment
+:sku must be swapped out with the sku of a product as found in proudctlist
+Creates a new comment for a specific product
+Post body example
+{
+    "name": "Nigel",
+    "comment": "This is a test"
+}            
+response body example
+{
+    "name": "Nigel",
+    "comment": "This is a test",
+    "id": 1ab6d9f6-da38-456e-9b09-ab0acd9ce8184,
+    "timestamp": 1531857374673        
+}
+```
+--------------------------------------------------------------------
+```
+POST /orders
+Creates a new order 
+post array of object list of product_id and qty.
+Post body example
+{
+    "user_id": 1,
+    "products": [{product_id_1,2}, {product_id_2,3}];
+}            
+response body example
+{
+    "order_id": order_id
+}
+```
+--------------------------------------------------------------------
+```
+GET /orders/:userId/:orderId
+returns one order belongs to userId
+reponse sample        
+    {
+        "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818"
+        "total":99.99;
+        "timestamp":1531857374673,
+        "proudct":[
+            {
+                "sku": 2012020410009,
+                "title":"8mm pearl sterling silver pendant",
+                "image":"/images/sku.main.jpg",
+                "price":99.99,
+                "quantity":1
+            },
+            {
+                "sku": 2015091410003,
+                "title":"sterling silver earstud",
+                "image":"/images/sku.main.jpg",
+                "price":19.99,
+                "quantity":1
+            }
+        ]
+    }
+```
+--------------------------------------------------------------------
+```
+GET /orders/:userId
+returns a list of all orders belongs to this user identified by userid
+reponse sample
+[
+    {
+        "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818"
+        "total":99.99;
+        "timestamp":1545162149000
+        "proudct":[
+            {
+                "sku": 2012020410009,
+                "title":"8mm pearl sterling silver pendant",
+                "image":"/images/sku.main.jpg",
+                "price":99.99,
+                "quantity":1
+            },
+            {
+                "sku": 2015091410003,
+                "title":"sterling silver earstud",
+                "image":"/images/sku.main.jpg",
+                "price":19.99,
+                "quantity":1
+            }
+        ]
+    }
+]
+```
+--------------------------------------------------------------------
+### Auth
 
-## Learn More
+Will use Auth for user sign up and login
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Roadmap
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Client
 
-### Code Splitting
+| SPRINT | functions | time schedule|
+|----------|----------|----------|
+| sprint-1 | build structure, route,header and footer | 2 days |
+| sprint-2 | component:product card, product page, product list page, floating cart and cart page, checkout page | 4 days |
+| sprint-3 | connect with SERVER  QURERY DATA / POST DATA (placing order) USER SIGN UP/LOGIN | 3 days |
+| sprint-4 | search page, fix layout and bug | 3 days |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Server
+| SPRINT | functions | time schedule|
+|----------|----------|----------|
+| sprint-1 | build up database schema and seed data | 3 days |
+| sprint-2 | build API Endpoints | 4 days |
+| sprint-3 | fix bug | 2 days |
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Nice-to-haves
+### website features
+1. My Account  
+2. Order History  
 
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### admin features
+1. add new products  
+2. browse orders, update order status  
+3. handle return / refund
