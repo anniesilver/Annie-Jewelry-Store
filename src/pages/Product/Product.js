@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useCart } from '../../components/CartProvider/CartProvider.js';
 // import {Link} from 'react-router-dom';
 import { getProductDetail,productImageBaseUrl} from '../../components/Util/api';
+import CommentSection from '../../components/CommentSection/CommentSection.js';
 
 export default function Product(){
     // Sample product data (replace with your actual product data)
@@ -70,7 +71,7 @@ export default function Product(){
     readyForRender && (
       <>
         <div className="product">
-            <div className="product__images">
+          <div className="product__images">
               <div className="product__images--main">
                 <img src={productImageBaseUrl+selectedImage} alt={currentProduct.name}/>
               </div>
@@ -100,8 +101,8 @@ export default function Product(){
             <div className='product__info--button'>
               <button onClick={handleAddToCart}><h3>Add to Cart</h3></button>
             </div>
-          </div>
-        </div>   
+          </div>          
+        </div>           
       </>        
     )
   )  

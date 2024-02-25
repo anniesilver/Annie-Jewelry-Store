@@ -39,8 +39,16 @@ export default function Search(){
         const sortedList = [...productsList];
         switch (option){
             case "Bestsellers":                
-                sortedList.sort((a, b) => a.sold - b.sold);   
+                sortedList.sort((a, b) => b.sold - a.sold);   
                 setProductsList(sortedList);             
+                break;
+            case "New Arrival":                
+                sortedList.sort((a, b) => a.id - b.id);
+                setProductsList(sortedList);
+                break;
+            case "Price:High to Low":
+                sortedList.sort((a, b) => b.price - a.price);
+                setProductsList(sortedList);
                 break;
             case "Price:Low to High":                
                 sortedList.sort((a, b) => a.price - b.price);

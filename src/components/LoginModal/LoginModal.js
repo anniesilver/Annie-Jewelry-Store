@@ -5,13 +5,15 @@ import {apiSignup,apiLogin} from "../Util/api";
 import { useCart } from '../CartProvider/CartProvider';
 
 
-export default function LoginModal({closeLoginModal}){
+export default function LoginModal({closeLoginModal,mode}){
     const {loginStatus,setLoginStatus} = useCart();
     const [showSignup, setShowSignup] = useState(false);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoginError, setIsLoginError] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    
+    if(mode === "signup"){
+        setShowSignup(true);
+    }
     if(loginStatus){
         closeLoginModal();
     }
@@ -67,6 +69,7 @@ export default function LoginModal({closeLoginModal}){
             setErrorMessage(response.error);
           }
         }catch(e){
+            setIsLoginError (true); 
           console.error(e);
         }
       }
@@ -86,8 +89,6 @@ export default function LoginModal({closeLoginModal}){
         setShowSignup(true);        
     }
 
-
-  
     const renderSignUp = () => (
         <div className="modal">
             <div className="modal__container">
@@ -103,7 +104,7 @@ export default function LoginModal({closeLoginModal}){
                         <label>Last Name:  </label> <input type="text" name="lastname" />
                     </div>
                     <div className="modal__input">
-                        <label>Password: </label><input type="password" name="password" />
+                        <label>Password: </label><input type="password" name="password"/>
                     </div>
                     <div className="modal__opt">
                         <button type="submit" onClick={handleSignUpCancel}>
@@ -128,7 +129,7 @@ export default function LoginModal({closeLoginModal}){
                         Email: <input type="Email" name="email" />
                     </div>
                     <div className="modal__input">
-                        Password: <input type="password" name="password" />
+                        Password: <input type="password" name="password"/>
                     </div>
                     <div className="modal__opt">
                         <button type="submit" onClick={handleLoginCancel}>

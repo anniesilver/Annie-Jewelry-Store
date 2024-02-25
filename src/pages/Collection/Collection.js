@@ -41,6 +41,7 @@ export default function Collection(){
                 try{
                     const list = await getProudctsByCollection(collection_id); 
                     if(list){
+                        list.sort((a, b) => b.sold - a.sold);                     
                         setProductsList(list);
                     }
                     else{
@@ -65,8 +66,12 @@ export default function Collection(){
         const sortedList = [...productsList];
         switch (option){
             case "Bestsellers":                
-                sortedList.sort((a, b) => a.sold - b.sold);   
+                sortedList.sort((a, b) => b.sold - a.sold);   
                 setProductsList(sortedList);             
+                break;
+            case "New Arrival":                
+                sortedList.sort((a, b) => a.id - b.id);
+                setProductsList(sortedList);
                 break;
             case "Price:Low to High":                
                 sortedList.sort((a, b) => a.price - b.price);

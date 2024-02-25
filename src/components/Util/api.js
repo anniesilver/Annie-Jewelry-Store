@@ -1,6 +1,6 @@
 import axios from "axios";
-export const baseUrl = "http://192.168.0.155:8080";
-export const productImageBaseUrl="http://192.168.0.155:8080/images/products/";
+export const baseUrl = "http://localhost:8080";
+export const productImageBaseUrl="http://localhost:8080/images/products/";
 
 
 export async function searchProducts(keywords){ 
@@ -66,16 +66,29 @@ export async function getProductDetail(productId){
     }
 }
 
-export async function postComment(id,commentData){ 
-    const URI=`${baseUrl}/products/${id}/comments`;  
+export async function postComment(product_id,commentData){ 
+    const URI=`${baseUrl}/products/${product_id}/comments`;  
     try {          
         const response = await axios.post(`${URI}`,commentData);    
         return response.data;
     } catch (err) {
-        console.log('error when retrieving video list in postComment. try again pls');
-        console.error(err);
+        console.error('error when submit the comment.', err);
     }
 }
+  
+export async function getComments(){ 
+    try {
+        const commentsData = await axios.get(`${this.baseUrl}comments?api_key=${this.apiKey}`);      
+        const sortedData = commentsData.data.sort(function (a, b) {
+            return b.timestamp - a.timestamp;
+          });       
+        return sortedData;
+    } catch (err) {
+        console.log('oops, error when retrieving comments data. try again pls');
+        console.error(err);
+    }
+  }
+
 
 export async function apiSignup(user){ 
     const URI=`${baseUrl}/users/signup`;  

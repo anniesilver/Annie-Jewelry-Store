@@ -1,0 +1,94 @@
+@use "../../styles/partials/variables" as *;
+@use "../../styles/partials/mixins" as *;
+
+
+.comment{
+    display :flex;
+    flex-direction: column;
+    padding:1rem;
+    @include tablet{
+        padding: 2rem;
+    }
+    form{
+        display :flex;
+        padding-bottom:$m-padding-content-between ;
+    }
+    label{
+        padding:0.5rem 0 0.5rem 3.25rem;
+    }
+    &__input{     
+        padding-bottom: $m-padding-content-between;          
+        @include tablet{                
+            width: 70%;         
+            padding: 0;         
+            margin:0;
+        }
+        @include desktop{
+            width: 70%;     
+            padding: 0;
+                       
+        }     
+    }
+    &__textarea{
+        background-color: $AnnieSilver-Alabaster;
+        padding: 0;
+        width: 100%;
+        border-radius: $AnnieSilver-Radius;
+        border:1px solid $AnnieSilver-Mercury;
+        height: 3*$button-height;
+        @include tablet{
+            height: $button-height;
+        }
+        @include desktop{
+            height: $button-height;
+        }                   
+        &--focus{
+            border-color:$AnnieSilver-Blue;
+        }
+        &--alert{
+            border-color:$AnnieSilver-AlertColor;
+        }       
+    }
+    
+    
+    &__form{
+        display:flex;         
+        width: 100%;
+        padding-left:$m-padding-content-between;
+
+        flex-direction: column;
+        @include tablet{
+            flex-direction: row;
+            justify-content: space-between;
+        }
+        @include desktop{
+            flex-direction: row;
+            justify-content: space-between;
+        }    
+    }
+    
+    &__item{
+        display: flex;   
+        padding:$m-padding-content-between 0 0 0;
+        border-bottom: 1px solid $AnnieSilver-Mercury;
+        
+    }
+
+    &__content{
+        display:flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 100%;
+        padding-left: $m-padding-content-between;
+        &--header{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            
+        }
+    }   
+    
+} 
+    
+   
+

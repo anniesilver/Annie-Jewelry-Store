@@ -15,6 +15,7 @@
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
+        align-self: flex-start;
         @include block_padding;
         column-gap: 2rem;
     }

@@ -13,6 +13,7 @@ export default function Checkout(){
     const [loginModal,setLoginModal]=useState(false);
     const [userProfile,setUserProfile]=useState({});
     const PAYPAL_CLIENT_ID = 'ASrSf2BqxbJrKbOSEgVCGLqv_EBsnn_r2tRhW7okcHFAhvB4zz_VgqGrFmIQX5bf0VN0fxpLYxNOo9iV'
+    let loginModalMode="";
 
     const itemTotal = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
     const accumTotal= cartList.reduce((total, currentItem) => total + (currentItem.qty*currentItem.price), 0);
@@ -28,22 +29,26 @@ export default function Checkout(){
       }
       else{
         setUserProfile({});
-      }
-       
+      }       
     },[loginStatus])
 
     async function getUserProfile(){
       const decodeUser= await getProfile();
-      console.log(decodeUser);
       setUserProfile(decodeUser);      
     }
 
     function handleLoginClick(e){
+      loginModalMode="login";
       setLoginModal(true);
     }
     function closeLoginModal(){
       setLoginModal(false);    
     }
+    function handleSigupClick(){
+      loginModalMode="signup";
+      setLoginModal(true);    
+    }
+    
     return (
       <section className='checkout'> 
           <div className="checkout__paypal"> 
@@ -63,14 +68,19 @@ export default function Checkout(){
                 )
             }              
             </div>
-            
-            <div className="checkout__paypal--container">
-            <div style={{maxWidth:"750px", minHeight:"200px"}}>
-                <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, components: "buttons", currency: "CAD" }}>
-                    <PaypalButtonWrapper showSpinner={false} />
-                </PayPalScriptProvider>
-            </div>
-            </div>
+            {
+              loginStatus ? (
+                <div className="checkout__paypal--container">
+                    <div style={{maxWidth:"750px", minHeight:"200px"}}>
+                        <PayPalScriptProvider options={{ clientId: PAYPAL_CLIENT_ID, components: "buttons", currency: "CAD" }}>
+                            <PaypalButtonWrapper showSpinner={false} />
+                        </PayPalScriptProvider>
+                    </div>
+               </div>
+              ):(
+                <></>
+              )
+            }            
           </div>
           {
               !isCartEmpty && (
@@ -113,7 +123,7 @@ export default function Checkout(){
               </div>)
           }
         {
-            loginModal && (<LoginModal closeLoginModal={closeLoginModal}/>)
+            loginModal && (<LoginModal closeLoginModal={closeLoginModal} mode={loginModalMode}/>)
         }  
     </section>
     );
