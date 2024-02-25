@@ -35,6 +35,7 @@ Let users easy find what they like ,show them quality pictures of products and d
 | Multi device| Responsive Desgin | 
 | BACK END  | Node.js | 
 | REST API  | express  |  
+| Authentication & Authorization  | JWT  |  
 | SQL | Knex|
 | DATABASE | MYSQL | 
 
@@ -80,14 +81,13 @@ contains only information for snapshot productcard
 repoonse sample 
 [
     {
+    "id": "16"，
     "sku": "200901041113"，
     "name":"18K Gold Akoya Pearl earstuds”，
-    "main_img":"/images/sku.main.jpg",
-    "other_img":["sku.01.jpg","sku.02.jpg","sku.03.jpg"]
+    "main_img":"200901041113-main.jpg",
     "price":199.99
     "sold":20,
     "discount_price":169.99,
-    "bullet_point:["sell poin 1","sell point 2"]
     },
 ]
 ```
@@ -98,20 +98,15 @@ returns a detail data object for one product identified by the sku
 response sample
 {
     "sku": "200901041113"，
-    "title":"18K Gold Akoya Pearl earstuds”，    
-    "main_img":"/images/sku.main.jpg",
-    "other_img":["sku.01.jpg"，"sku.02.jpg"],
+    "name":"18K Gold Akoya Pearl earstuds”，    
+    "main_img":"200901041113-main.jpg",
+    "other_img":["200901041113-1.jpg"，"200901041113-2.jpg"],
     "price":199.99,
+    "discount_price":169.99,
     "description":"this product is build with Akoya sea cultured pearl and 18K Gold. The pearl size around 5mm in dirameters."
-    "category":["pearl","18kGold"],
-    "comments":[
-        {
-            "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818",
-            "name":"Jessie",            
-            "comment":"this is a very beautiful pearl",
-            "timestamp":"1545162149000"
-        },
-    ],
+    "bullet_point":["pearl size 8mm","18kGold crafted","good gift"],    
+    "category_id",2
+    "collection_id", 2
     "sold":20,
     "stock":5
 }
@@ -121,50 +116,53 @@ response sample
 GET /proudcts/ts/:limit
 returns a list of most sold products. if limit =0 then return all products ordered by sold number desc, if limit >0 then return limit items.
 response sample
-{
+[
+    {
+    "id": "16"，
     "sku": "200901041113"，
-    "title":"18K Gold Akoya Pearl earstuds”，    
-    "main_img":"/images/sku.main.jpg",
-    "other_img":["sku.01.jpg"，"sku.02.jpg"],
-    "price":199.99,
-    "description":"this product is build with Akoya sea cultured pearl and 18K Gold. The pearl size around 5mm in dirameters."
-    "category":["pearl","18kGold"],
-    "comments":[
-        {
-            "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818",
-            "name":"Jessie",            
-            "comment":"this is a very beautiful pearl",
-            "timestamp":"1545162149000"
-        },
-    ],
+    "name":"18K Gold Akoya Pearl earstuds”，
+    "main_img":"200901041113-main.jpg",
+    "price":199.99
     "sold":20,
-    "stock":5
+    "discount_price":169.99,
+    },
+    {
+    "id": "12"，
+    "sku": "201101041113"，
+    "name":"silver earstuds”，
+    "main_img":"201101041113-main.jpg",
+    "price":199.99
+    "sold":20,
+    "discount_price":169.99,
 }
+]
+
 ```
 --------------------------------------------------------------------
 ```
 GET /proudcts/cl/:collection_id
 returns a list of a collection_id specified collection of products 
 response sample
-{
+[
+    {
+    "id": "16"，
     "sku": "200901041113"，
-    "title":"18K Gold Akoya Pearl earstuds”，    
-    "main_img":"/images/sku.main.jpg",
-    "other_img":["sku.01.jpg"，"sku.02.jpg"],
-    "price":199.99,
-    "description":"this product is build with Akoya sea cultured pearl and 18K Gold. The pearl size around 5mm in dirameters."
-    "category":["pearl","18kGold"],
-    "comments":[
-        {
-            "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818",
-            "name":"Jessie",            
-            "comment":"this is a very beautiful pearl",
-            "timestamp":"1545162149000"
-        },
-    ],
+    "name":"18K Gold Akoya Pearl earstuds”，
+    "main_img":"200901041113-main.jpg",
+    "price":199.99
     "sold":20,
-    "stock":5
+    "discount_price":169.99,
+    },
+    {
+    "id": "12"，
+    "sku": "201101041113"，
+    "name":"silver earstuds”，
+    "main_img":"201101041113-main.jpg",
+    "price":199.99
+    "sold":20,
+    "discount_price":169.99,
 }
+]
 ```
 --------------------------------------------------------------------
 ```
@@ -175,43 +173,26 @@ request parmas
 ["pearl","necklace"]
 }
 response sample
-{
+[
+    {
+    "id": "16"，
     "sku": "200901041113"，
-    "title":"18K Gold Akoya Pearl earstuds”，    
-    "main_img":"/images/sku.main.jpg",
-    "other_img":["sku.01.jpg"，"sku.02.jpg"],
-    "price":199.99,
-    "description":"this product is build with Akoya sea cultured pearl and 18K Gold. The pearl size around 5mm in dirameters."
-    "category":["pearl","18kGold"],
-    "comments":[
-        {
-            "id":"1ab6d9f6-da38-456e-9b09-ab0acd9ce818",
-            "name":"Jessie",            
-            "comment":"this is a very beautiful pearl",
-            "timestamp":"1545162149000"
-        },
-    ],
+    "name":"18K Gold Akoya Pearl earstuds”，
+    "main_img":"200901041113-main.jpg",
+    "price":199.99
     "sold":20,
-    "stock":5
+    "discount_price":169.99,
+    },
+    {
+    "id": "12"，
+    "sku": "201101041113"，
+    "name":"silver earstuds”，
+    "main_img":"201101041113-main.jpg",
+    "price":199.99
+    "sold":20,
+    "discount_price":169.99,
 }
-```
---------------------------------------------------------------------
-```
-POST /proudcts/:sku/comment
-:sku must be swapped out with the sku of a product as found in proudctlist
-Creates a new comment for a specific product
-Post body example
-{
-    "name": "Nigel",
-    "comment": "This is a test"
-}            
-response body example
-{
-    "name": "Nigel",
-    "comment": "This is a test",
-    "id": 1ab6d9f6-da38-456e-9b09-ab0acd9ce8184,
-    "timestamp": 1531857374673        
-}
+]
 ```
 --------------------------------------------------------------------
 ```
@@ -299,7 +280,7 @@ return the whole JSON package(which includes the orderID created) received from 
 --------------------------------------------------------------------
 ### Auth
 
-Will use Auth for user sign up and login
+using JWT for Authentication & Authorization
 
 ## Roadmap
 
