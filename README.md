@@ -44,15 +44,16 @@ NEED TO BUILD MY OWN API
 
 ### Sitemap
 
-[x]Homepage  
-[x]Collection Pages
-[x]Search
-[x]4.Product Detail
-[x]Floating Cart
-[x]View Shopping Cart  
-[x]Checkout  
-[x]Sign up  
-[x]Login
+*Homepage  
+*Collection Pages
+*Search
+*Product Detail
+*Floating Cart
+*View Shopping Cart
+*Checkout
+*Sign up
+*Login
+
 
 ### Mockups
 
