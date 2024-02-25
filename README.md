@@ -44,20 +44,20 @@ NEED TO BUILD MY OWN API
 
 ### Sitemap
 
-1.Homepage  
-2.Collection Pages
-3.Search
-4.Product Detail 
-5.Floating Cart
-7.View Shopping Cart  
-8.Checkout  
-9.Sign up  
-10.Login
+[x]Homepage  
+[x]Collection Pages
+[x]Search
+[x]4.Product Detail
+[x]Floating Cart
+[x]View Shopping Cart  
+[x]Checkout  
+[x]Sign up  
+[x]Login
 
 ### Mockups
 
 ![home page](/src/assets/readme/home.jpg)
-![collection page](/srcassets/readme/category.jpg)
+![collection page](/src/assets/readme/category.jpg)
 ![floating cart layer](/src/assets/readme/floating-cart.jpg)
 ![product page](/src/assets/readme/product.jpg)
 ![shopping cart page](/src/assets/readme/shoppingcart.jpg)
