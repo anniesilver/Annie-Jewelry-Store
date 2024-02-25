@@ -19,7 +19,7 @@ Let users easy find what they like ,show them quality pictures of products and d
 | feature   |
 | ------------- | 
 | Product collection browse , sorting by different criteria|
-| Product detail viewing and comments  |
+| Product detail viewing  |
 | add products to shopping cart ,modify cart|
 | checkout and pay with creditcard , placing order  |
 | user sign up and login auth |
