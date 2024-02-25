@@ -26,7 +26,8 @@ export default function Home(){
         <>
         <section className="hero">
             <img src={bannerImg} alt="Annie Jewelry Store"></img>
-            <h1>Valentine's Day Is Coming!</h1>
+            {/* <h1>Spring Is Coming!</h1> */}
+            <div class="rainbow-text">Spring Is Coming...</div>
         </section>
         <section className='topsellers'>            
             <h1>Top Sellers</h1>

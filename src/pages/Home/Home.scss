@@ -8,14 +8,8 @@
     @include tablet{
         padding:0 2rem;
     }
-    
-    h1{
-        position: absolute;
-        top: 22%; 
-        left: 13%;
-        background-color: transparent;
-        z-index: 99;
-    }
+   
+   
     img{
         width:100%;
         object-fit: cover;
@@ -42,3 +36,38 @@
         
     }   
 }
+
+.rainbow-text {
+    position: absolute;
+    z-index: 99;        
+    background: linear-gradient(90deg, 
+    //   rgb(156, 13, 68), rgb(195, 170, 81), rgb(205, 176, 207),  rgb(138, 191, 219), rgb(38, 71, 204),rgb(172, 117, 185));
+      rgb(172, 117, 185), rgb(38, 71, 204), rgb(195, 170, 81), 
+      rgb(172, 117, 185), rgb(38, 71, 204), rgb(195, 170, 81), 
+      rgb(172, 117, 185), rgb(38, 71, 204));
+    background-size: 200% 200%;
+    animation: rainbow 5s linear infinite;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size:2.2rem;    
+    top: 6%; 
+    left: 12%;
+    @include tablet{
+        font-size: 3rem;
+        top: 6%; 
+        left: 14%;
+    }
+    @include desktop{
+        font-size: 4.5rem;
+        top: 6%; 
+        left: 14%;
+    }
+  }  
+  @keyframes rainbow {
+    0% {
+      background-position: 0% 50%;
+    }
+    100% {
+      background-position: 100% 50%;
+    }
+  }
