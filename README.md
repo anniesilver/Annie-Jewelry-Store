@@ -56,19 +56,19 @@ NEED TO BUILD MY OWN API
 
 ### Mockups
 
-![home page](/assets/readme/home.jpg)
-![collection page](/assets/readme/category.jpg)
-![floating cart layer](/assets/readme/floating-cart.jpg)
-![product page](/assets/readme/product.jpg)
-![shopping cart page](/assets/readme/shoppingcart.jpg)
-![sgin up page](/assets/readme/signup.jpg)
-![login in page](/assets/readme/login.jpg)
-![check out page](/assets/readme/checkout.jpg)
+![home page](/src/assets/readme/home.jpg)
+![collection page](/srcassets/readme/category.jpg)
+![floating cart layer](/src/assets/readme/floating-cart.jpg)
+![product page](/src/assets/readme/product.jpg)
+![shopping cart page](/src/assets/readme/shoppingcart.jpg)
+![sgin up page](/src/assets/readme/signup.jpg)
+![login in page](/src/assets/readme/login.jpg)
+![check out page](/src/assets/readme/checkout.jpg)
 
 
 ### Data
 
-![Database Design](/assets/readme/database.png)
+![Database Design](/src/assets/readme/database.png)
 
 ### Endpoints
 --------------------------------------------------------------------

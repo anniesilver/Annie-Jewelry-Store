@@ -1,7 +1,7 @@
 // Custom component to wrap the PayPalButtons and show loading spinner
 import {PayPalButtons,usePayPalScriptReducer} from "@paypal/react-paypal-js";
 import {useCart} from '../CartProvider/CartProvider';
-
+import {baseUrl} from '../Util/api';
 export default function PaypalButtonWrapper({ showSpinner }){
     const [{ isPending }] = usePayPalScriptReducer();
     const {cartList, setCartList} = useCart();
@@ -11,8 +11,7 @@ export default function PaypalButtonWrapper({ showSpinner }){
         "color":"silver",
         "shape":"pill"
     };
-    const baseUrl = "http://192.168.0.155:8080";
-    
+
     async function createOrder() {
         const token = sessionStorage.getItem("authToken");
         try {
