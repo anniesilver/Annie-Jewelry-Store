@@ -35,7 +35,7 @@ Let users easy find what they like ,show them quality pictures of products and d
 | Multi device| Responsive Desgin | 
 | BACK END  | Node.js | 
 | REST API  | express  |  
-| Knex | SQL |
+| SQL | Knex|
 | DATABASE | MYSQL | 
 
 
@@ -44,30 +44,31 @@ NEED TO BUILD MY OWN API
 
 ### Sitemap
 
--Homepage  
--Collection  
--Search
--Product  
--ViewCart  
--Checkout  
--Sign up  
--Login
+1.Homepage  
+2.Collection Pages
+3.Search
+4.Product Detail 
+5.Floating Cart
+7.View Shopping Cart  
+8.Checkout  
+9.Sign up  
+10.Login
 
 ### Mockups
 
-![home page](/images/home.jpg)
-![collection page](/images/category.jpg)
-![floating cart layer](/images/floating-cart.jpg)
-![product page](/images/product.jpg)
-![shopping cart page](/images/shoppingcart.jpg)
-![sgin up page](/images/signup.jpg)
-![login in page](/images/login.jpg)
-![check out page](/images/checkout.jpg)
+![home page](/assets/readme/home.jpg)
+![collection page](/assets/readme/category.jpg)
+![floating cart layer](/assets/readme/floating-cart.jpg)
+![product page](/assets/readme/product.jpg)
+![shopping cart page](/assets/readme/shoppingcart.jpg)
+![sgin up page](/assets/readme/signup.jpg)
+![login in page](/assets/readme/login.jpg)
+![check out page](/assets/readme/checkout.jpg)
 
 
 ### Data
 
-![Database Design](/images/database.png)
+![Database Design](/assets/readme/database.png)
 
 ### Endpoints
 --------------------------------------------------------------------
