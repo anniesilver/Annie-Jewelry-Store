@@ -262,7 +262,7 @@ POST header sample
             }     
 }
 post body will include a full list of prodcut in shopping cart
-request body sample
+post body sample
 {
 [
   {
@@ -294,6 +294,7 @@ request body sample
   }
 ]
 }
+return the whole JSON package(which includes the orderID created) received from paypal payment gateway. package detail refers to paypal standard integration document.
 ```
 --------------------------------------------------------------------
 ### Auth
@@ -323,6 +324,7 @@ Will use Auth for user sign up and login
 ### website features
 1. My Account  
 2. Order History  
+3. Product Comment  
 
 ### admin features
 1. add new products  
