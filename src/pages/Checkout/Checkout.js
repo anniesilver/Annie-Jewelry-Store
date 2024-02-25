@@ -3,16 +3,17 @@ import { useCart } from '../../components/CartProvider/CartProvider';
 import PaypalButtonWrapper from '../../components/PaypalButtonWrapper/PaypalButtonWrapper';
 import {PayPalScriptProvider} from "@paypal/react-paypal-js";
 import {roundPrice} from '../../components/Util/util';
-import {getProfile} from "../../components/Util/api";
+import {getProfile,PAYPAL_CLIENT_ID} from "../../components/Util/api";
 import { useState,useEffect } from "react";
 import LoginModal from "../../components/LoginModal/LoginModal";
+
 
 export default function Checkout(){
     const {cartList, loginStatus} = useCart();   
     const isCartEmpty = Boolean(cartList.length === 0);
     const [loginModal,setLoginModal]=useState(false);
     const [userProfile,setUserProfile]=useState({});
-    const PAYPAL_CLIENT_ID = 'ASrSf2BqxbJrKbOSEgVCGLqv_EBsnn_r2tRhW7okcHFAhvB4zz_VgqGrFmIQX5bf0VN0fxpLYxNOo9iV'
+  
     let loginModalMode="";
 
     const itemTotal = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
