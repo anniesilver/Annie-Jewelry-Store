@@ -43,16 +43,16 @@ Let users easy find what they like ,show them quality pictures of products and d
 NEED TO BUILD MY OWN API
 
 ### Sitemap
+1. Homepage
+2. Collection Pages  
+3. Search
+4. Product Detail
+5. Floating Cart
+6. View Shopping Cart
+7. Checkout
+8. Sign up
+9. Login
 
-*Homepage  
-*Collection Pages
-*Search
-*Product Detail
-*Floating Cart
-*View Shopping Cart
-*Checkout
-*Sign up
-*Login
 
 
 ### Mockups
