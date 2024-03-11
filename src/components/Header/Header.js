@@ -71,7 +71,12 @@ export default function Header(){
             const keywrods= e.target.value.split(" ").filter(word => word !== ""); 
             setSearchKeywords(keywrods);
             navigate('/search');
-            e.target.value="";
+            if(document.getElementById("menu_home").classList.contains("header__menu--highlight")){
+                document.getElementById("menu_home").classList.remove("header__menu--highlight");
+            }            
+            if(document.getElementById("menu_collection").classList.contains("header__menu--highlight")){
+                document.getElementById("menu_collection").classList.remove("header__menu--highlight");
+            }            
         }         
     }
     function handleMenuClick(e){
@@ -113,7 +118,8 @@ export default function Header(){
     }
        
     const totalQty = cartList.reduce((total, currentItem) => total + currentItem.qty, 0);
-
+    const showQty = Boolean(totalQty>0);
+    console.log("show number",showQty);
     return(
     <header className="header">
         <div className="header__container">
@@ -138,20 +144,24 @@ export default function Header(){
                         </div>
                     )
                 }
-                <div className="header__cart" onClick={handleCartClick}>
-                    <p>{totalQty}</p>
+                <div className="header__cart" onClick={handleCartClick}>      
+                {
+                    showQty && (
+                    <p> {totalQty}</p>
+                    )
+                }         
                     <img src={cart} alt="Annie Jewelry Store"></img>       
                 </div>
             </div>             
         </div>                 
         <nav className="header__navbar"> 
             <div className="header__nav"> 
-            <div className="header__menu">             
+                <div className="header__menu">             
                     <li id="menu_home" onClick={handleMenuClick}>Home</li>
                 </div> 
                 <div className="header__menu" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}}>   
                 
-                    <li id="menu_collection" onClick={handleMenuClick} >Collecitons</li>
+                    <li id="menu_collection" onClick={handleMenuClick} >Collections</li>
                     {isFloatingMenuOn && (      
                         <div className="header__floating" onMouseOver={()=> {setisFloatingMenuOn(true)}} onMouseLeave={()=> {setisFloatingMenuOn(false)}} onClick={()=> {setisFloatingMenuOn(false)}} >
                             <ul>
@@ -160,9 +170,9 @@ export default function Header(){
                                 <li id="collection_3" onClick={handleMenuClick}>Golden Collection</li>
                             </ul>
                         </div>
-                    )}      
-                   
+                    )}                   
                 </div> 
+                
             </div>       
             <div className="header__search">
                 <input type="search" placeholder="Search" onKeyDown={handleSearchKeyDown}/>   

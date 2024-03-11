@@ -1,5 +1,5 @@
 import './Cart.scss';
-import {Link,useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import ProductCard from '../ProductCard/ProductCard';
 import closeIcon from "../../assets/icon/close-24px.svg";
 import rightIcon from "../../assets/icon/right-24px.svg";

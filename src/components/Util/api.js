@@ -1,6 +1,6 @@
 import axios from "axios";
-export const baseUrl = "http://localhost:8080";
-export const productImageBaseUrl="http://localhost:8080/images/products/";
+export const baseUrl = "http://192.168.0.155:8080";
+export const productImageBaseUrl="http://192.168.0.155:8080/images/products/";
 export const PAYPAL_CLIENT_ID = 'ASrSf2BqxbJrKbOSEgVCGLqv_EBsnn_r2tRhW7okcHFAhvB4zz_VgqGrFmIQX5bf0VN0fxpLYxNOo9iV';
 
 
