@@ -23,7 +23,7 @@ export default function Checkout(){
     const tax = roundPrice(accumTotal*0.13);
     const shippingFee = roundPrice((accumTotal<100 && accumTotal > 0) ? 10 : 0);
     const orderTotal = roundPrice(accumTotal + accumTotal*0.13 + shippingFee);
- 
+    console.log("PAYPAL_CLIENT_ID =",PAYPAL_CLIENT_ID);
     useEffect(()=>{
       if(loginStatus){
         getUserProfile();

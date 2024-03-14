@@ -14,7 +14,10 @@
     &__products{
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-evenly;
+        justify-content: center;
+        @include tablet{
+            justify-content: space-between;
+        }
         align-self: flex-start;
         @include block_padding;
         column-gap: 2rem;

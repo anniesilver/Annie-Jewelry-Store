@@ -82,7 +82,7 @@ export default function LoginModal({closeLoginModal,mode}){
     }
     const handleSignUpCancel = (e) => {
         setShowSignup(false);
-        closeLoginModal();
+        //closeLoginModal();
     }
     
     const handleSignupClick = (e) => {

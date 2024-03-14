@@ -41,7 +41,7 @@
     &__navbar{
         display: flex;
         justify-content: center;
-        align-items: flex-end;
+        align-items: center;
         @include tablet{
             justify-content: space-between;
         }     
